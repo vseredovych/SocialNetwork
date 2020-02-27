@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using BLL.Mapper;
+using BLL.Services;
 using DAL;
 using DAL.DatabaseConfig;
 using Microsoft.AspNetCore.Builder;
@@ -29,16 +32,23 @@ namespace MVC
         {
             services.AddControllersWithViews();
 
-            //Mongo Configuration
+            //Mongo Configuration Dependency Injection
             services.Configure<MongoConfiguration>(
             Configuration.GetSection(nameof(MongoConfiguration)));
 
             services.AddSingleton<IMongoConfiguration>(sp =>
                 sp.GetRequiredService<IOptions<MongoConfiguration>>().Value);
 
-            services.AddSingleton<IMongoContext, MongoContext>();
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IMongoContext, MongoContext>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+            // BLL Mapper Dependency INjection
+            services.AddSingleton<IMapper>(ObjectsMapper.CreateMapper());
+
+            // Services Dependency Injection
+            services.AddTransient<IPostService, PostService>();
+
+            // Controllers Dependency Injection
             services.AddControllers();
         }
 
