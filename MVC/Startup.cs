@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL;
+using DAL.DatabaseConfig;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using MVC.Models;
 
 namespace MVC
 {
@@ -24,6 +28,18 @@ namespace MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //Mongo Configuration
+            services.Configure<MongoConfiguration>(
+            Configuration.GetSection(nameof(MongoConfiguration)));
+
+            services.AddSingleton<IMongoConfiguration>(sp =>
+                sp.GetRequiredService<IOptions<MongoConfiguration>>().Value);
+
+            services.AddSingleton<IMongoContext, MongoContext>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
