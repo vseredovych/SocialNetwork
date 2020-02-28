@@ -1,10 +1,62 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
 
-    <div class="text-center">
-        @foreach(var el in Model.GetAll())
-        {<p>@(el.Author + ": " + el.Content)</p>}
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+.content {
+    grid-area: main;
+}
+.sidebar {
+    grid-area: sd;
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    grid-template-areas:
+      "sd sd sd main main main main main main"
+}
+* {box-sizing: border-box;}
+
+/*.wrapper {
+    border: 2px solid #f76707;
+    border-radius: 5px;
+    background-color: #fff4e6;
+    max-width: 940px;
+    margin: 0 auto;
+}
+
+.wrapper > div {
+    border: 2px solid #ffa94d;
+    border-radius: 5px;
+    background-color: #ffd8a8;
+    padding: 1em;
+    color: #d9480f;
+}*/
+</style >
+<div class="wrapper">
+    <div class="sidebar">Sidebar</div>
+    <div class="content">
+        <div>
+            @foreach (var el in Model.GetAll())
+            {
+                <div class="post-container">
+                    <p>@(el.AuthorName + ": " + el.Text) </p>
+                    @foreach (var cmt in el.Comments)
+                    {
+                        <p>@(cmt.AuthorName + ": " + cmt.Text) </p>
+                    }
+
+                    <span class="post-time-right"> @(el.Timestamp)</span>
+                </div>
+            }
+        </div>
     </div>
+</div>
+
+
+
+    <div class="text-center" >
+    <h1 class="display-4" > Welcome</h1 >
+    <p > Learn about <a href="https://docs.microsoft.com/aspnet/core" > building Web apps with ASP.NET Core</a > .</p >
+    </div >

@@ -5,7 +5,7 @@ using System;
 namespace DAL.Entities
 {
     [BsonIgnoreExtraElements]
-    public class Post
+    public class Comment
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -28,9 +28,5 @@ namespace DAL.Entities
 
         [BsonElement("likes")]
         public int Likes { get; set; }
-
-        [BsonElement("comments")]
-        public Comment[] Comments { get; set; }
-
     }
 }

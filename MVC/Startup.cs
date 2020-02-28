@@ -35,7 +35,6 @@ namespace MVC
             //Mongo Configuration Dependency Injection
             services.Configure<MongoConfiguration>(
             Configuration.GetSection(nameof(MongoConfiguration)));
-
             services.AddSingleton<IMongoConfiguration>(sp =>
                 sp.GetRequiredService<IOptions<MongoConfiguration>>().Value);
 

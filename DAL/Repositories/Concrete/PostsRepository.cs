@@ -1,9 +1,7 @@
 ﻿using DAL.DatabaseConfig;
 using DAL.Entities;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DAL.Repositories
 {
@@ -30,7 +28,7 @@ namespace DAL.Repositories
         public IEnumerable<Post> GetByAuthor(string author)
         {
             var builder = Builders<Post>.Filter;
-            var filter = builder.Eq(el => el.Author, author);
+            var filter = builder.Eq(el => el.AuthorEmail, author);
 
             var result = collection
                 .Find(filter)
