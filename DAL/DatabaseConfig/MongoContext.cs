@@ -1,8 +1,5 @@
 ﻿using DAL.Entities;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DAL.DatabaseConfig
 {

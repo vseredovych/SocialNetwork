@@ -1,14 +1,12 @@
 ﻿using DAL.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BLL.DTOs
 {
     public class PostDTO
-    { 
+    {
         public string _id { get; set; }
-        
+
         public string AuthorEmail { get; set; }
 
         public string AuthorName { get; set; }

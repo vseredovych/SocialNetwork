@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using BLL.DTOs;
 using DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BLL.Mapper
 {

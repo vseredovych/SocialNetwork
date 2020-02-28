@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using BLL.Services;
-using DAL;
-using DAL.DatabaseConfig;
+﻿using BLL.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
+using System.Diagnostics;
 //using MVC.Models.DatabaseConfig;
 
 

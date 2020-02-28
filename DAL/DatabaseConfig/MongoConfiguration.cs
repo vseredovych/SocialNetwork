@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DAL.DatabaseConfig
+﻿namespace DAL.DatabaseConfig
 {
     public class MongoConfiguration : IMongoConfiguration
     {
