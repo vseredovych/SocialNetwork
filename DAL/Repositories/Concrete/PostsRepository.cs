@@ -36,5 +36,31 @@ namespace DAL.Repositories
 
             return result;
         }
+        public Post IncPostLikes(string id)
+        {
+            var builder = Builders<Post>.Filter;
+            var filter = builder.Eq(el => el._id, id);
+
+            var update = new UpdateDefinitionBuilder<Post>().Inc(el => el.Likes, 1);
+            var options = new FindOneAndUpdateOptions<Post>();
+            options.ReturnDocument = ReturnDocument.After;
+            options.Projection = new ProjectionDefinitionBuilder<Post>().Include(el => el.Likes);
+            var result = collection.FindOneAndUpdate<Post>(el => el._id == id, update, options);
+            
+            return result;
+        }
+        public Post DicPostLikes(string id)
+        {
+            var builder = Builders<Post>.Filter;
+            var filter = builder.Eq(el => el._id, id);
+
+            var update = new UpdateDefinitionBuilder<Post>().Inc(el => el.Likes, -1);
+            var options = new FindOneAndUpdateOptions<Post>();
+            options.ReturnDocument = ReturnDocument.After;
+            options.Projection = new ProjectionDefinitionBuilder<Post>().Include(el => el.Likes);
+            var result = collection.FindOneAndUpdate<Post>(el => el._id == id, update, options);
+
+            return result;
+        }
     }
 }

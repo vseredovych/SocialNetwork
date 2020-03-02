@@ -2,11 +2,12 @@
 using BLL.DTOs;
 using DAL;
 using DAL.Entities;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 
 namespace BLL.Services
 {
-    public class PostService : IPostService
+    public class PostService : PageModel, IPostService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -27,6 +28,17 @@ namespace BLL.Services
             }
             return posts;
         }
-
+        public int GetLikes(string id)
+        {
+            return _unitOfWork.PostsRepository.DicPostLikes(id).Likes;
+        }
+        public int LikePost(string id)
+        {
+            return _unitOfWork.PostsRepository.IncPostLikes(id).Likes;
+        }
+        public int DislikePost(string id)
+        {
+            return _unitOfWork.PostsRepository.DicPostLikes(id).Likes;
+        }
     }
 }

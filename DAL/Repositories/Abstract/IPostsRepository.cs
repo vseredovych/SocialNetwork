@@ -7,5 +7,9 @@ namespace DAL.Repositories
     {
         IEnumerable<Post> GetAll();
         IEnumerable<Post> GetByAuthor(string author);
+
+        Post IncPostLikes(string id);
+
+        Post DicPostLikes(string id);
     }
 }
