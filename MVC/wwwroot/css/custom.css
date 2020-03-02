@@ -1,29 +1,9 @@
-﻿.post-container {
-    border: 2px solid #dedede;
+﻿.post {
     background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-    .post-container::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-
-    .post-container img {
-        float: left;
-        max-width: 60px;
-        width: 100%;
-        margin-right: 20px;
-        border-radius: 50%;
-    }
-
-.post-container img.right {
-    float: right;
-    margin-left: 20px;
-    margin-right: 0;
+    border: 2px solid #aaa;
+    border-radius: 1px;
+    padding: 5px;
+    margin: 5px 0;
 }
 
 .post-time-right {
@@ -31,7 +11,15 @@
     color: #aaa;
 }
 
-.post-time-left {
-    float: left;
-    color: #999;
+.post-time-right {
+    float: right;
+    color: #aaa;
+}
+
+.break-text p {
+    word-wrap: break-word;
+}
+
+.profile-text {
+    font-size: small;
 }
