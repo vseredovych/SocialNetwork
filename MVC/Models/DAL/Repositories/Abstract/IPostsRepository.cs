@@ -1,15 +1,15 @@
 ﻿using MVC.Models.DAL.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MVC.Models.DAL.Repositories
 {
     public interface IPostsRepository
     {
-        IEnumerable<Post> GetAll();
-        IEnumerable<Post> GetByAuthor(string author);
-
-        Post IncPostLikes(string id);
-
-        Post DicPostLikes(string id);
+        Task<IList<Post>> GetAll();
+        Task<IList<Post>> GetByAuthor(string author);
+        Task<int> GetLikesById(string id);
+        Task<Post> IncPostLikes(string id);
+        Task<Post> DicPostLikes(string id);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using MVC.Models.BLL.DTOs;
 using MVC.Models.DAL.Entities;
+using MVC.ViewModels;
 
 namespace MVC.Models.BLL.Mapper
 {
@@ -10,8 +10,10 @@ namespace MVC.Models.BLL.Mapper
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<PostDTO, Post>();
-                cfg.CreateMap<Post, PostDTO>();
+                cfg.CreateMap<PostItemViewModel, Post>();
+                cfg.CreateMap<Post, PostItemViewModel>()
+                .ForMember(x => x.Id,
+                           m => m.MapFrom(y => y._id));
                 //cfg.CreateMap<Order, OrderDTO>();
                 //cfg.CreateMap<OrderDTO, OrderViewModel>()
                 //   .ForMember(x => x.User,

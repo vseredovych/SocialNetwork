@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
+using MVC.Models.BLL.DTOs;
 using MVC.Models.BLL.Services;
+using MVC.ViewModels;
 using System.Diagnostics;
+using System.Threading.Tasks;
 //using MVC.Models.DatabaseConfig;
 
 namespace MVC.Controllers
@@ -19,12 +22,34 @@ namespace MVC.Controllers
             _postService = postService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ///
-            return View(_postService);
+            PostIndexViewModel vm = new PostIndexViewModel() { PostItems = await _postService.GetAll() };
+
+            return View(vm);
         }
 
+        //public IActionResult LikePost(string id)
+        //{
+        //    _postService.LikePost(id);
+        //    return View(_postService);
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult LikePost(PostDTO dto)
+        {
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //if (ModelState.IsValid)
+            //{
+            //    _postService.LikePost(dto._id);
+            //}
+            return View(_postService);
+        }
         public IActionResult Privacy()
         {
             return View();

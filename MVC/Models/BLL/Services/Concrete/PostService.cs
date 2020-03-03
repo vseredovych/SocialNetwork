@@ -1,14 +1,15 @@
 ﻿
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MVC.Models.BLL.DTOs;
 using MVC.Models.DAL;
 using MVC.Models.DAL.Entities;
+using MVC.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MVC.Models.BLL.Services
 {
-    public class PostService : PageModel, IPostService
+    public class PostService : IPostService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -18,28 +19,36 @@ namespace MVC.Models.BLL.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public IEnumerable<PostDTO> GetAll()
+        public async Task<IEnumerable<PostItemViewModel>> GetAll()
         {
-            List<PostDTO> posts = new List<PostDTO>();
+            List<PostItemViewModel> posts = new List<PostItemViewModel>();
 
-            foreach (var post in _unitOfWork.PostsRepository.GetAll())
+            foreach (var post in await _unitOfWork.PostsRepository.GetAll())
             {
-                PostDTO dto = _mapper.Map<Post, PostDTO>(post);
+                PostItemViewModel dto = _mapper.Map<Post, PostItemViewModel>(post);
                 posts.Add(dto);
             }
             return posts;
         }
-        public int GetLikes(string id)
+        public async Task<int> GetLikes(string id)
         {
-            return _unitOfWork.PostsRepository.DicPostLikes(id).Likes;
+
+            var likes = await _unitOfWork.PostsRepository.GetLikesById(id);
+            return likes;
         }
-        public int LikePost(string id)
+        public async Task<PostItemViewModel> LikePost(string id)
         {
-            return _unitOfWork.PostsRepository.IncPostLikes(id).Likes;
+            var post = await _unitOfWork.PostsRepository.IncPostLikes(id);
+            PostItemViewModel dto = _mapper.Map<Post, PostItemViewModel>(post);
+
+            return dto;
         }
-        public int DislikePost(string id)
+        public async Task<PostItemViewModel> DislikePost(string id)
         {
-            return _unitOfWork.PostsRepository.DicPostLikes(id).Likes;
+            var post = await _unitOfWork.PostsRepository.DicPostLikes(id);
+            PostItemViewModel dto = _mapper.Map<Post, PostItemViewModel>(post);
+
+            return dto;
         }
     }
 }

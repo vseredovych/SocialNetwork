@@ -1,11 +1,14 @@
 ﻿using MVC.Models.DAL.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MVC.Models.BLL.DTOs
+namespace MVC.ViewModels
 {
-    public class PostDTO
+    public class PostItemViewModel
     {
-        public string _id { get; set; }
+        public string Id { get; set; }
 
         public string AuthorEmail { get; set; }
 
@@ -20,6 +23,5 @@ namespace MVC.Models.BLL.DTOs
         public int Likes { get; set; }
 
         public Comment[] Comments { get; set; }
-
     }
 }

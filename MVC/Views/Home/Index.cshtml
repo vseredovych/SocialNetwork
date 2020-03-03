@@ -23,7 +23,7 @@
                 <div>Menu</div>
             </div>
             <div class="col-10 wall">
-                @foreach (var el in Model.GetAll())
+                @foreach (var el in Model.PostItems)
                 {
                     <div class="row post">
                         @*<div class="col-2 fill"></div>*@
@@ -39,17 +39,29 @@
                             <p>@(el.Text)</p>
 
 
-                            <form method="post">
-                                Name:
-                                <input type="submit" />
-                            </form>
-
-                            <input type="text" data-val="true"
-                                   id="Customer_Name" maxlength="10" name="Customer.Name" value="" />
-
                             @*<input type="button" title="Like" value=@("Likes: " + el.Like) onclick="Like" />*@
                             @*                            <form method="post"><button class="btn btn-default">@("Likes: " + el.Likes)t</button></form>*@
 
+
+                            @*<form asp-controller="Home" asp-action="LikePost" method="post">
+            <!-- Input and Submit elements -->
+            <input name="id" type="hidden" value="<removed for brevity>">
+            <button asp-page="About">@("Likes: " + el.Likes)</button>
+        </form>*@
+                            @*<form  asp-controller="Home" asp-action="LikePost">
+            <a asp-route-id="@el">Like</a>                <input asp-for="ReleaseDate" class="form-control" />
+            <input asp-for="" class="form-control" />
+        </form>*@
+
+                            @*<form asp-action="Edit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="Id" />
+                                <div class="form-group">
+                                    <label asp-for="Id" class="control-label"></label>
+                                    <input asp-for="Id" class="form-control" />
+                                </div>
+
+                            </form>*@
                         </div>
                         @foreach (var comment in el.Comments)
                         {

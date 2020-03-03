@@ -2,6 +2,8 @@
 using MVC.Models.DAL.DatabaseConfig;
 using MVC.Models.DAL.Entities;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MVC.Models.DAL.Repositories
 {
@@ -13,30 +15,40 @@ namespace MVC.Models.DAL.Repositories
         {
             this.collection = context.Posts();
         }
-        public IEnumerable<Post> GetAll()
+        public async Task<IList<Post>> GetAll()
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Empty;
 
-            var result = collection
-                .Find(filter)
-                .Limit(5)
-                .ToEnumerable();
-
+            var result = await collection.Find<Post>(filter).ToListAsync<Post>();
+       
             return result;
         }
-        public IEnumerable<Post> GetByAuthor(string author)
+        public async Task<IList<Post>> GetByAuthor(string author)
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Eq(el => el.AuthorEmail, author);
 
-            var result = collection
+            var result = await collection
                 .Find(filter)
-                .ToEnumerable();
+                .ToListAsync();
 
             return result;
         }
-        public Post IncPostLikes(string id)
+
+        public async Task<int> GetLikesById(string id)
+        {
+            var builder = Builders<Post>.Filter;
+            var filter = builder.Eq(el => el._id, id);
+
+            var result = await collection
+                .Find(filter)
+                .Limit(1)
+                .SingleAsync();
+
+            return result.Likes;
+        }
+        public async Task<Post> IncPostLikes(string id)
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Eq(el => el._id, id);
@@ -45,11 +57,11 @@ namespace MVC.Models.DAL.Repositories
             var options = new FindOneAndUpdateOptions<Post>();
             options.ReturnDocument = ReturnDocument.After;
             options.Projection = new ProjectionDefinitionBuilder<Post>().Include(el => el.Likes);
-            var result = collection.FindOneAndUpdate<Post>(el => el._id == id, update, options);
+            var result = await collection.FindOneAndUpdateAsync<Post>(el => el._id == id, update, options);
             
             return result;
         }
-        public Post DicPostLikes(string id)
+        public async Task<Post> DicPostLikes(string id)
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Eq(el => el._id, id);
@@ -58,7 +70,7 @@ namespace MVC.Models.DAL.Repositories
             var options = new FindOneAndUpdateOptions<Post>();
             options.ReturnDocument = ReturnDocument.After;
             options.Projection = new ProjectionDefinitionBuilder<Post>().Include(el => el.Likes);
-            var result = collection.FindOneAndUpdate<Post>(el => el._id == id, update, options);
+            var result = await collection.FindOneAndUpdateAsync<Post>(el => el._id == id, update, options);
 
             return result;
         }
