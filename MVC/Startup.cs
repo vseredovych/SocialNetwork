@@ -1,14 +1,14 @@
 using AutoMapper;
-using BLL.Mapper;
-using BLL.Services;
-using DAL;
-using DAL.DatabaseConfig;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using MVC.Models.BLL.Mapper;
+using MVC.Models.BLL.Services;
+using MVC.Models.DAL;
+using MVC.Models.DAL.DatabaseConfig;
 
 namespace MVC
 {

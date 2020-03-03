@@ -1,10 +1,9 @@
-﻿using BLL.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
+using MVC.Models.BLL.Services;
 using System.Diagnostics;
 //using MVC.Models.DatabaseConfig;
-
 
 namespace MVC.Controllers
 {
