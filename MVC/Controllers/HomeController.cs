@@ -1,10 +1,13 @@
-﻿using BLL.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
+using MVC.Models.Services;
+using MVC.ViewModels;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 //using MVC.Models.DatabaseConfig;
-
 
 namespace MVC.Controllers
 {
@@ -20,19 +23,32 @@ namespace MVC.Controllers
             _postService = postService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ///
-            return View(_postService);
+            var viewModel = await _postService.GetAllAsync();
+
+            return View(viewModel);
         }
 
-        public IActionResult Privacy()
+        //public IActionResult LikePost(string id)
+        //{
+        //    _postService.LikePost(id);
+        //    return View(_postService);
+        //}
+
+        public async Task<IActionResult> LikePost(string postId)
+        {
+            var post = await _postService.LikePostAsync(postId);
+            return NoContent();
+
+        }
+        public async Task<IActionResult> Privacy()
         {
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

@@ -1,14 +1,14 @@
 using AutoMapper;
-using BLL.Mapper;
-using BLL.Services;
-using DAL;
-using DAL.DatabaseConfig;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using MVC.DAL;
+using MVC.DAL.DatabaseConfig;
+using MVC.Models.Mapper;
+using MVC.Models.Services;
 
 namespace MVC
 {
@@ -69,7 +69,7 @@ namespace MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/");
             });
         }
     }

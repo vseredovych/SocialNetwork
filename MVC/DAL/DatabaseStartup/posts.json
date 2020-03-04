@@ -1,0 +1,120 @@
+[
+{
+    "authorEmail": "jensen@silent.nope",
+    "authorName": "Adam",
+    "authorSurname": "Jensen",
+    "timestamp": "2017-01-02T05:34:00.000+02:00",
+    "text": "Killed one more freak.",
+    "likes":0,
+    "comments":[{
+        "authorEmail": "jensen@silent.nope",
+        "authorName": "Adam",
+        "authorSurname": "Jensen",
+        "text":"Nice",
+        "timestamp": "2017-01-02T05:34:00.000+02:00",
+        "likes": 0
+    },
+    {
+        "authorEmail": "bob.ros@paint.com",
+        "authorName": "Bob",
+        "authorSurname": "Ross",
+        "text":"It would be better to paint him.",
+        "timestamp": "2017-01-02T05:34:00.000+02:00",
+        "likes": 0
+    },
+    {
+        "authorEmail": "know.nothing@what.why",
+        "authorName": "Jhon",
+        "authorSurname": "RoSnowss",
+        "text":"It was me...",
+        "timestamp": "2017-01-02T05:34:00.000+02:00",
+        "likes": 0
+    }
+    ]
+},
+{
+    "authorEmail": "bob.ros@paint.com",
+    "authorName": "Bob",
+    "authorSurname": "Ross",
+    "timestamp": "2017-01-02T05:34:00.000+02:00",
+    "text": "Painting is so cool.",
+    "likes":0,
+    "comments":[{
+        "authorEmail": "jensen@silent.nope",
+        "authorName": "Adam",
+        "authorSurname": "Jensen",
+        "text":"Nice",
+        "timestamp": "2017-01-02T05:34:00.000+02:00",
+        "likes": 0
+    }
+    ]
+},
+{
+    "authorEmail": "bob.ros@paint.com",
+    "authorName": "Bob",
+    "authorSurname": "Ross",
+    "timestamp": "2017-01-02T05:34:00.000+02:00",
+    "text": "Paint a guy killed by Adam's Jensen. Please check it here: www.bobross.com/?id=514362",
+    "likes":0,
+    "comments":[{
+        "authorEmail": "jensen@silent.nope",
+        "authorName": "Adam",
+        "authorSurname": "Jensen",
+        "text":"Nice",
+        "timestamp": "2017-01-02T05:34:00.000+02:00",
+        "likes": 0
+    }
+    ]
+},
+{
+    "authorEmail": "know.nothing@what.why",
+    "authorName": "Jhon",
+    "authorSurname": "Snow",
+    "timestamp": "2019-01-02T05:34:00.000+02:00",
+    "text": "Am I still alive? I am not sure...",
+    "likes":0,
+    "comments":[{
+        "authorEmail": "jensen@silent.nope",
+        "authorName": "Adam",
+        "authorSurname": "Jensen",
+        "text":"Nice",
+        "timestamp": "2020-01-02T05:34:00.000+02:00",
+        "likes": 0
+    }
+    ]
+},
+{
+    "authorEmail": "victor.seredovich@gmail.com",
+    "authorName": "Viktor",
+    "authorSurname": "Seredovych",
+    "timestamp": "2019-01-02T05:34:00.000+02:00",
+    "text": "No need to wait to the end of a deadline and created a spagetti project. Do a spagetti project immediately and then you will have a time to fix it.",
+    "likes":0,
+    "comments":[{
+        "authorEmail": "jensen@silent.nope",
+        "authorName": "Adam",
+        "authorSurname": "Jensen",
+        "text":"Nice",
+        "timestamp": "2020-01-02T05:34:00.000+02:00",
+        "likes": 0
+    }
+    ]
+},
+{
+    "authorEmail": "ipetr@email.com",
+    "authorName": "Igor",
+    "authorSurname": "Petruk",
+    "timestamp": "2015-01-02T05:34:00.000+02:00",
+    "text": "I don't have a single friend :(",
+    "likes":0,
+    "comments":[{
+        "authorEmail": "jensen@silent.nope",
+        "authorName": "Adam",
+        "authorSurname": "Jensen",
+        "text":"Nice",
+        "timestamp": "2016-01-02T05:34:00.000+02:00",
+        "likes": 0
+    }
+    ]
+}
+]

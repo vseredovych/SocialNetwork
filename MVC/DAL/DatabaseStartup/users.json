@@ -1,0 +1,80 @@
+[
+{
+    "name": "admin",
+    "surname": "admin",
+    "email": "admin@gmail.com",
+    "hashPassword": "xHashPasswordx",
+    "friends": [
+        {
+            "email": "victor.seredovich@gmail.com"
+        }
+    ]
+},
+{
+    "name": "Viktor",
+    "surname": "Seredovych",
+    "email": "victor.seredovich@gmail.com",
+    "hashPassword": "xHashPasswordx",
+    "friends": [
+        {
+            "email": "know.nothing@what.why"
+        },
+        {
+            "email": "jensen@silent.nope"
+        },
+        {
+            "email": "bob.ros@paint.com"
+        },
+        {
+            "email": "admin@gmail.com"
+        }
+    ]
+},
+{
+    "name": "Adam",
+    "surname": "Jensen",
+    "email": "jensen@silent.nope",
+    "hashPassword": "xHashPasswordx",
+    "friends": [
+        {
+            "email": "victor.seredovich@gmail.com"
+        }
+    ]
+},
+{
+    "name": "Jhon",
+    "surname": "Snow",
+    "email": "know.nothing@what.why",
+    "hashPassword": "xHashPasswordx",
+    "friends": [
+        {
+            "email": "victor.seredovich@gmail.com"
+        }
+    ]
+},
+{
+    "name": "Bob",
+    "surname": "Ross",
+    "email": "bob.ros@paint.com",
+    "hashPassword": "xHashPasswordx",
+    "friends": [
+        {
+            "email": "victor.seredovich@gmail.com"
+        }
+    ]
+},
+{
+    "name": "Igor",
+    "surname": "Petruk",
+    "email": "prahma.l@everyshop.us",
+    "hashPassword": "xHashPasswordx",
+    "friends": []
+},
+{
+    "name": "Zakaria",
+    "surname": "Barrera",
+    "email": "7morga@vendasml.ml",
+    "hashPassword": "xHashPasswordx",
+    "friends": []
+}
+]
