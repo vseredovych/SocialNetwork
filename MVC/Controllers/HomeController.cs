@@ -24,7 +24,10 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            PostIndexViewModel vm = new PostIndexViewModel() { PostItems = await _postService.GetAllAsyn() };
+            PostIndexViewModel vm = new PostIndexViewModel() 
+            { 
+                PostItems = await _postService.GetAllAsync() 
+            };
 
             return View(vm);
         }
