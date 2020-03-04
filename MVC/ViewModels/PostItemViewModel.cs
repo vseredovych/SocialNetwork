@@ -3,7 +3,7 @@ using System;
 
 namespace MVC.ViewModels
 {
-    public class PostItemViewModel
+    public class PostItemViewModelasd
     {
         public string Id { get; set; }
 

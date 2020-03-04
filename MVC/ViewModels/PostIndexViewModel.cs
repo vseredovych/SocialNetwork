@@ -4,6 +4,6 @@ namespace MVC.ViewModels
 {
     public class PostIndexViewModel
     {
-        public IEnumerable<PostItemViewModel> PostItems { get; set; }
+        public IEnumerable<PostViewModel> PostItems { get; set; }
     }
 }

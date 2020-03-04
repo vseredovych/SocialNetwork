@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<MVC.ViewModels.PostViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -8,71 +9,75 @@
 
 <script language="javascript">
 
-    function Reset() {
+    function LikePost(form) {
+        $(form).parents('li').remove();
+    }
 
-        //Do Some thing
+    function updatePostLikes(postId)
+    {
+        id = "like_info_" + postId;
+        el = document.getElementById(id);
 
+        el.textContent = parseInt(el.textContent) + 1;
+        //$(postId).html(a);
+        //and probably call document.forms[0].submit();
     }
 
 </script>
 
 <section>
-    <div class="container-fluid">
-        <div class="row home-view">
-            <div class="col-2 menu">
-                <div>Menu</div>
-            </div>
-            <div class="col-10 wall">
-                @foreach (var el in Model.PostItems)
-                {
-                    <div class="row post">
-                        @*<div class="col-2 fill"></div>*@
-                        <div class="col-12">
-                            <div class="col-12 profile-text">
-                                <b profile-text>@(el.AuthorName + " " + el.AuthorSurname)</b>
-                            </div>
-                            <div class="col-12 profile-text">
-                                <b profile-text>@(el.AuthorEmail)</b>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3 break-text post-text">
-                            <p>@(el.Text)</p>
-
-
-                            @*<input type="button" title="Like" value=@("Likes: " + el.Like) onclick="Like" />*@
-                            @*                            <form method="post"><button class="btn btn-default">@("Likes: " + el.Likes)t</button></form>*@
-
-
-                            @*<form asp-controller="Home" asp-action="LikePost" method="post">
-            <!-- Input and Submit elements -->
-            <input name="id" type="hidden" value="<removed for brevity>">
-            <button asp-page="About">@("Likes: " + el.Likes)</button>
-        </form>*@
-                            @*<form  asp-controller="Home" asp-action="LikePost">
-            <a asp-route-id="@el">Like</a>                <input asp-for="ReleaseDate" class="form-control" />
-            <input asp-for="" class="form-control" />
-        </form>*@
-
-                            @*<form asp-action="Edit">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="Id" />
-                                <div class="form-group">
-                                    <label asp-for="Id" class="control-label"></label>
-                                    <input asp-for="Id" class="form-control" />
+@*</div>
+                            @foreach (var comment in item.Comments)
+                            {
+                                <div class="col-12 break-text post-comment">
+                                    <p>@(comment.AuthorName + ": " + comment.Text)</p>
                                 </div>
-
-                            </form>*@
+                            }
                         </div>
-                        @foreach (var comment in el.Comments)
-                        {
-                            <div class="col-12 break-text post-comment">
-                                <p>@(comment.AuthorName + ": " + comment.Text)</p>
-                            </div>
-                        }
-                    </div>
-                    <hr>
+                        <hr>
+                    }
                 }
             </div>
         </div>
-    </div>
-</section>
+    </div>*@
+
+    <ul class="list-group list-group-lg list-group-flush list my--4">
+        @foreach (var post in Model)
+        {
+            <li class="list-group-item px-0">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="avatar avatar-lg">
+                            <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.pinclipart.com%2Fpicdir%2Fbig%2F420-4203805_sans-the-skeleton-copy-png-megalovania-sans-memes.png&imgrefurl=https%3A%2F%2Fwww.pinclipart.com%2Fmaxpin%2FihmJRhw%2F&tbnid=_x-BXGQp-ubhjM&vet=12ahUKEwihpqa9y4DoAhXQxqQKHYyqCKAQMygPegUIARCKAg..i&docid=cx8IpNmXCoWpqM&w=1418&h=1346&q=megalovania%20skeleton&ved=2ahUKEwihpqa9y4DoAhXQxqQKHYyqCKAQMygPegUIARCKAg" alt="" class="avatar-img">
+                        </span>
+                    </div>
+                    <div class="col ml--2">
+                        <h4 class="card-title mb-1">
+                            <a href="#!">@(post.AuthorName + " " + post.AuthorSurname)</a>
+                        </h4>
+                        <p class="card-text small text-muted mb-1">
+                            @post.AuthorEmail
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <p class="card-text text-center mr-4 ml-4 mt-2 mb-2">
+                            @post.Text
+                        </p>
+
+
+                        <div class="col-12">
+                            <div class="btn btn-sm btn-danger float-right" id="@("like_info_" + post.Id)">
+                                @(post.Likes)
+                            </div>
+
+                            <form class="float-right" asp-controller="Home" asp-action="LikePost" asp-route-postId="@post.Id" data-ajax="true">
+                                <button type="submit" onclick="updatePostLikes('@post.Id')" class="btn btn-sm btn-danger">
+                                    Like
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul></section>

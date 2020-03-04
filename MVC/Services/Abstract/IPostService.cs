@@ -6,9 +6,9 @@ namespace MVC.Models.Services
 {
     public interface IPostService
     {
-        Task<IEnumerable<PostItemViewModel>> GetAllAsync();
+        Task<IEnumerable<PostViewModel>> GetAllAsync();
         Task<int> GetLikesAsync(string id);
-        Task<PostItemViewModel> LikePostAsync(string id);
-        Task<PostItemViewModel> DislikePostAsync(string id);
+        Task<PostViewModel> LikePostAsync(string id);
+        Task<PostViewModel> DislikePostAsync(string id);
     }
 }

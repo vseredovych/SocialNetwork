@@ -10,8 +10,8 @@ namespace MVC.Models.Mapper
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<PostItemViewModel, Post>();
-                cfg.CreateMap<Post, PostItemViewModel>()
+                cfg.CreateMap<PostViewModel, Post>();
+                cfg.CreateMap<Post, PostViewModel>()
                 .ForMember(x => x.Id,
                            m => m.MapFrom(y => y._id));
                 //cfg.CreateMap<Order, OrderDTO>();

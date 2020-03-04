@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 using MVC.Models;
 using MVC.Models.Services;
 using MVC.ViewModels;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 //using MVC.Models.DatabaseConfig;
@@ -23,12 +25,9 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            PostIndexViewModel vm = new PostIndexViewModel()
-            {
-                PostItems = await _postService.GetAllAsync()
-            };
+            var viewModel = await _postService.GetAllAsync();
 
-            return View(vm);
+            return View(viewModel);
         }
 
         //public IActionResult LikePost(string id)
@@ -37,20 +36,11 @@ namespace MVC.Controllers
         //    return View(_postService);
         //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LikePost(PostItemViewModel model)
+        public async Task<IActionResult> LikePost(string postId)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
+            var post = await _postService.LikePostAsync(postId);
+            return NoContent();
 
-            //if (ModelState.IsValid)
-            //{
-            //    _postService.LikePost(dto._id);
-            //}
-            return View(_postService);
         }
         public async Task<IActionResult> Privacy()
         {

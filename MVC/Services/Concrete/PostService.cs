@@ -18,13 +18,13 @@ namespace MVC.Models.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<PostItemViewModel>> GetAllAsync()
+        public async Task<IEnumerable<PostViewModel>> GetAllAsync()
         {
-            List<PostItemViewModel> posts = new List<PostItemViewModel>();
+            List<PostViewModel> posts = new List<PostViewModel>();
 
             foreach (var post in await _unitOfWork.PostsRepository.GetAllAsync())
             {
-                PostItemViewModel dto = _mapper.Map<Post, PostItemViewModel>(post);
+                PostViewModel dto = _mapper.Map<Post, PostViewModel>(post);
                 posts.Add(dto);
             }
             return posts;
@@ -35,17 +35,17 @@ namespace MVC.Models.Services
             var likes = await _unitOfWork.PostsRepository.GetLikesByIdAsync(id);
             return likes;
         }
-        public async Task<PostItemViewModel> LikePostAsync(string id)
+        public async Task<PostViewModel> LikePostAsync(string id)
         {
             var post = await _unitOfWork.PostsRepository.IncPostLikesAsync(id);
-            PostItemViewModel dto = _mapper.Map<Post, PostItemViewModel>(post);
+            PostViewModel dto = _mapper.Map<Post, PostViewModel>(post);
 
             return dto;
         }
-        public async Task<PostItemViewModel> DislikePostAsync(string id)
+        public async Task<PostViewModel> DislikePostAsync(string id)
         {
             var post = await _unitOfWork.PostsRepository.DicPostLikesAsync(id);
-            PostItemViewModel dto = _mapper.Map<Post, PostItemViewModel>(post);
+            PostViewModel dto = _mapper.Map<Post, PostViewModel>(post);
 
             return dto;
         }
