@@ -1,8 +1,8 @@
-﻿using MVC.Models.DAL.Entities;
+﻿using MVC.DAL.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MVC.Models.DAL.Repositories
+namespace MVC.DAL.Repositories
 {
     public interface IPostsRepository
     {

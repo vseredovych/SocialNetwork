@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
-using MVC.Models.BLL.DTOs;
-using MVC.Models.BLL.Services;
+using MVC.Models.Services;
 using MVC.ViewModels;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -24,9 +23,9 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            PostIndexViewModel vm = new PostIndexViewModel() 
-            { 
-                PostItems = await _postService.GetAllAsync() 
+            PostIndexViewModel vm = new PostIndexViewModel()
+            {
+                PostItems = await _postService.GetAllAsync()
             };
 
             return View(vm);
@@ -40,7 +39,7 @@ namespace MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LikePost(PostDTO dto)
+        public async Task<IActionResult> LikePost(PostItemViewModel model)
         {
             //if (id == null)
             //{

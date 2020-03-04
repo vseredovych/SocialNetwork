@@ -2,10 +2,10 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace MVC.Models.DAL.Entities
+namespace MVC.DAL.Entities
 {
     [BsonIgnoreExtraElements]
-    public class Post
+    public class Comment
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -28,9 +28,5 @@ namespace MVC.Models.DAL.Entities
 
         [BsonElement("likes")]
         public int Likes { get; set; }
-
-        [BsonElement("comments")]
-        public Comment[] Comments { get; set; }
-
     }
 }

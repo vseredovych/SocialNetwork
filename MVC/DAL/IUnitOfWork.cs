@@ -1,6 +1,6 @@
-﻿using MVC.Models.DAL.Repositories;
+﻿using MVC.DAL.Repositories;
 
-namespace MVC.Models.DAL
+namespace MVC.DAL
 {
     public interface IUnitOfWork
     {

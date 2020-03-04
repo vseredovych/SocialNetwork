@@ -1,4 +1,4 @@
-﻿namespace MVC.Models.DAL.DatabaseConfig
+﻿namespace MVC.DAL.DatabaseConfig
 {
     public class MongoConfiguration : IMongoConfiguration
     {

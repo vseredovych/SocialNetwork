@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Models\DAL\DatabaseStartup\posts.json" />
-    <Content Remove="Models\DAL\DatabaseStartup\users.json" />
+    <Content Remove="DAL\DatabaseStartup\posts.json" />
+    <Content Remove="DAL\DatabaseStartup\users.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Models\DAL\DatabaseStartup\posts.json" />
-    <None Include="Models\DAL\DatabaseStartup\users.json" />
+    <None Include="DAL\DatabaseStartup\posts.json" />
+    <None Include="DAL\DatabaseStartup\users.json" />
   </ItemGroup>
 
   <ItemGroup>

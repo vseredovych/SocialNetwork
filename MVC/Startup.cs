@@ -5,10 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using MVC.Models.BLL.Mapper;
-using MVC.Models.BLL.Services;
-using MVC.Models.DAL;
-using MVC.Models.DAL.DatabaseConfig;
+using MVC.DAL;
+using MVC.DAL.DatabaseConfig;
+using MVC.Models.Mapper;
+using MVC.Models.Services;
 
 namespace MVC
 {

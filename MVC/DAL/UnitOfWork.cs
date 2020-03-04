@@ -1,8 +1,8 @@
-﻿using MVC.Models.DAL.DatabaseConfig;
-using MVC.Models.DAL.Repositories;
+﻿using MVC.DAL.DatabaseConfig;
+using MVC.DAL.Repositories;
 using Unity.Resolution;
 
-namespace MVC.Models.DAL
+namespace MVC.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {

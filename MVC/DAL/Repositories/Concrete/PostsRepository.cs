@@ -1,11 +1,10 @@
 ﻿using MongoDB.Driver;
-using MVC.Models.DAL.DatabaseConfig;
-using MVC.Models.DAL.Entities;
+using MVC.DAL.DatabaseConfig;
+using MVC.DAL.Entities;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace MVC.Models.DAL.Repositories
+namespace MVC.DAL.Repositories
 {
     public class PostsRepository : IPostsRepository
     {
@@ -21,7 +20,7 @@ namespace MVC.Models.DAL.Repositories
             var filter = builder.Empty;
 
             var result = await collection.Find<Post>(filter).ToListAsync<Post>();
-       
+
             return result;
         }
         public async Task<IList<Post>> GetByAuthorAsync(string author)
@@ -58,7 +57,7 @@ namespace MVC.Models.DAL.Repositories
             options.ReturnDocument = ReturnDocument.After;
             options.Projection = new ProjectionDefinitionBuilder<Post>().Include(el => el.Likes);
             var result = await collection.FindOneAndUpdateAsync<Post>(el => el._id == id, update, options);
-            
+
             return result;
         }
         public async Task<Post> DicPostLikesAsync(string id)

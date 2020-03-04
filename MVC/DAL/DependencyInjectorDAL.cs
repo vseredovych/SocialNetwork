@@ -1,8 +1,8 @@
-﻿using MVC.Models.DAL.Repositories;
+﻿using MVC.DAL.Repositories;
 using Unity;
 using Unity.Resolution;
 
-namespace MVC.Models.DAL
+namespace MVC.DAL
 {
     public static class DependencyInjectorDAL
     {

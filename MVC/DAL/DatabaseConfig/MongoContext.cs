@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
-using MVC.Models.DAL.Entities;
+using MVC.DAL.Entities;
 
-namespace MVC.Models.DAL.DatabaseConfig
+namespace MVC.DAL.DatabaseConfig
 {
     public class MongoContext : IMongoContext
     {

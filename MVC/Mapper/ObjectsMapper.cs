@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using MVC.Models.DAL.Entities;
+using MVC.DAL.Entities;
 using MVC.ViewModels;
 
-namespace MVC.Models.BLL.Mapper
+namespace MVC.Models.Mapper
 {
     public static class ObjectsMapper
     {
