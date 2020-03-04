@@ -24,7 +24,7 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            PostIndexViewModel vm = new PostIndexViewModel() { PostItems = await _postService.GetAll() };
+            PostIndexViewModel vm = new PostIndexViewModel() { PostItems = await _postService.GetAllAsyn() };
 
             return View(vm);
         }
@@ -37,7 +37,7 @@ namespace MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult LikePost(PostDTO dto)
+        public async Task<IActionResult> LikePost(PostDTO dto)
         {
             //if (id == null)
             //{
@@ -50,13 +50,13 @@ namespace MVC.Controllers
             //}
             return View(_postService);
         }
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

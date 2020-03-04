@@ -15,7 +15,7 @@ namespace MVC.Models.DAL.Repositories
         {
             this.collection = context.Posts();
         }
-        public async Task<IList<Post>> GetAll()
+        public async Task<IList<Post>> GetAllAsync()
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Empty;
@@ -24,7 +24,7 @@ namespace MVC.Models.DAL.Repositories
        
             return result;
         }
-        public async Task<IList<Post>> GetByAuthor(string author)
+        public async Task<IList<Post>> GetByAuthorAsync(string author)
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Eq(el => el.AuthorEmail, author);
@@ -36,7 +36,7 @@ namespace MVC.Models.DAL.Repositories
             return result;
         }
 
-        public async Task<int> GetLikesById(string id)
+        public async Task<int> GetLikesByIdAsync(string id)
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Eq(el => el._id, id);
@@ -48,7 +48,7 @@ namespace MVC.Models.DAL.Repositories
 
             return result.Likes;
         }
-        public async Task<Post> IncPostLikes(string id)
+        public async Task<Post> IncPostLikesAsync(string id)
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Eq(el => el._id, id);
@@ -61,7 +61,7 @@ namespace MVC.Models.DAL.Repositories
             
             return result;
         }
-        public async Task<Post> DicPostLikes(string id)
+        public async Task<Post> DicPostLikesAsync(string id)
         {
             var builder = Builders<Post>.Filter;
             var filter = builder.Eq(el => el._id, id);
