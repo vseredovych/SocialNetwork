@@ -6,7 +6,7 @@ using MVC.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MVC.Models.Services
+namespace MVC.Services
 {
     public class PostService : IPostService
     {

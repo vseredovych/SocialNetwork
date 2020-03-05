@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC.ViewModels.PostViewModel>
+﻿@model IEnumerable<PostViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -19,36 +19,26 @@
         el = document.getElementById(id);
 
         el.textContent = parseInt(el.textContent) + 1;
-        //$(postId).html(a);
-        //and probably call document.forms[0].submit();
     }
-
+    //$(postId).html(a);
+    //and probably call document.forms[0].submit();
 </script>
 
 <section>
-@*</div>
-                            @foreach (var comment in item.Comments)
+                            @*@foreach (var comment in item.Comments)
                             {
                                 <div class="col-12 break-text post-comment">
                                     <p>@(comment.AuthorName + ": " + comment.Text)</p>
-                                </div>
-                            }
-                        </div>
-                        <hr>
-                    }
-                }
-            </div>
-        </div>
-    </div>*@
+                                </div>*@
 
     <ul class="list-group list-group-lg list-group-flush list my--4">
         @foreach (var post in Model)
         {
             <li class="list-group-item px-0">
                 <div class="row align-items-center">
-                    <div class="col-auto">
+                    <div class="col-2" style="width: 100%">
                         <span class="avatar avatar-lg">
-                            <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.pinclipart.com%2Fpicdir%2Fbig%2F420-4203805_sans-the-skeleton-copy-png-megalovania-sans-memes.png&imgrefurl=https%3A%2F%2Fwww.pinclipart.com%2Fmaxpin%2FihmJRhw%2F&tbnid=_x-BXGQp-ubhjM&vet=12ahUKEwihpqa9y4DoAhXQxqQKHYyqCKAQMygPegUIARCKAg..i&docid=cx8IpNmXCoWpqM&w=1418&h=1346&q=megalovania%20skeleton&ved=2ahUKEwihpqa9y4DoAhXQxqQKHYyqCKAQMygPegUIARCKAg" alt="" class="avatar-img">
+                            <img class="img-fluid avatar-img" src="https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png" alt="">
                         </span>
                     </div>
                     <div class="col ml--2">
@@ -63,19 +53,48 @@
                         <p class="card-text text-center mr-4 ml-4 mt-2 mb-2">
                             @post.Text
                         </p>
-
-
-                        <div class="col-12">
-                            <div class="btn btn-sm btn-danger float-right" id="@("like_info_" + post.Id)">
-                                @(post.Likes)
-                            </div>
-
-                            <form class="float-right" asp-controller="Home" asp-action="LikePost" asp-route-postId="@post.Id" data-ajax="true">
-                                <button type="submit" onclick="updatePostLikes('@post.Id')" class="btn btn-sm btn-danger">
-                                    Like
-                                </button>
-                            </form>
+                    </div>
+                    <div class="col-12">
+                        <div class="btn btn-sm btn-danger float-right" id="@("like_info_" + post.Id)">
+                            @(post.Likes)
                         </div>
+
+                        <form class="float-right" asp-controller="Home" asp-action="LikePost" asp-route-postId="@post.Id" data-ajax="true">
+                            <button type="submit" onclick="updatePostLikes('@post.Id')" class="btn btn-sm btn-danger">
+                                Like
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-12">
+                        <ul class="list-group list-group-lg list-group-flush list my--4">
+                            @foreach (var comment in post.Comments)
+                            {
+                            <li class="list-group-item ml-2 mr-2 px-0">
+                                <div class="row align-items-center">
+
+                                    <div class="col-2" style="width: 100%">
+                                        <span class="avatar avatar-lg">
+                                            <img class="img-fluid avatar-img rounded-circle profile-avatar" src="https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png" alt="">
+                                        </span>
+                                    </div>
+                                    <div class="col-8 bg-light">
+                                        <h4 class="card-title small mb-1">
+                                            <a href="#!">@(comment.AuthorName + " " + comment.AuthorSurname)</a>
+                                        </h4>
+                                        <p class="card-text small text-muted mb-1">
+                                            @comment.AuthorEmail
+                                        </p>
+                                        <div class="text-secondary">
+                                            <p class="card-text text-center mr-4 ml-2 mt-1 mb-1">
+                                                @comment.Text
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            }
+                        </ul>
+
                     </div>
                 </div>
             </li>

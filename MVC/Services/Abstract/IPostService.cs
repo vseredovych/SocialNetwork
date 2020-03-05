@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MVC.Models.Services
+namespace MVC.Services
 {
     public interface IPostService
     {

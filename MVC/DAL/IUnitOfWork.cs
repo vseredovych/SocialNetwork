@@ -5,5 +5,6 @@ namespace MVC.DAL
     public interface IUnitOfWork
     {
         IPostsRepository PostsRepository { get; }
+        IUsersRepository UsersRepository { get; }
     }
 }

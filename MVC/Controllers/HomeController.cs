@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
-using MVC.Models.Services;
-using MVC.ViewModels;
-using System.Collections;
-using System.Collections.Generic;
+using MVC.Services;
 using System.Diagnostics;
 using System.Threading.Tasks;
 //using MVC.Models.DatabaseConfig;
@@ -23,6 +21,7 @@ namespace MVC.Controllers
             _postService = postService;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var viewModel = await _postService.GetAllAsync();

@@ -2,7 +2,7 @@
 
 namespace MVC.ViewModels
 {
-    public class PostIndexViewModel
+    public class PostIndexViewModelasdasdasd
     {
         public IEnumerable<PostViewModel> PostItems { get; set; }
     }

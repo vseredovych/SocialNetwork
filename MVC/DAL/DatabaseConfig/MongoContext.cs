@@ -17,5 +17,9 @@ namespace MVC.DAL.DatabaseConfig
         {
             return database.GetCollection<Post>("posts");
         }
+        public IMongoCollection<User> Users()
+        {
+            return database.GetCollection<User>("users");
+        }
     }
 }

@@ -18,7 +18,8 @@ namespace MVC.DAL
         public static void RegisterDALTypes(this IUnityContainer container)
         {
             container
-                .RegisterType<IPostsRepository, PostsRepository>();
+                .RegisterType<IPostsRepository, PostsRepository>()
+                .RegisterType<IUsersRepository, UsersRepository>();
         }
 
         public static T Resolve<T>(params ParameterOverride[] overrides)

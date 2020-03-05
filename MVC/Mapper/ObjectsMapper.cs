@@ -14,6 +14,9 @@ namespace MVC.Models.Mapper
                 cfg.CreateMap<Post, PostViewModel>()
                 .ForMember(x => x.Id,
                            m => m.MapFrom(y => y._id));
+                cfg.CreateMap<User, UserModel>()
+                .ForMember(x => x.Id,
+                           m => m.MapFrom(y => y._id));
                 //cfg.CreateMap<Order, OrderDTO>();
                 //cfg.CreateMap<OrderDTO, OrderViewModel>()
                 //   .ForMember(x => x.User,

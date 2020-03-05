@@ -6,5 +6,6 @@ namespace MVC.DAL.DatabaseConfig
     public interface IMongoContext
     {
         IMongoCollection<Post> Posts();
+        IMongoCollection<User> Users();
     }
 }
