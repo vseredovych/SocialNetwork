@@ -1,4 +1,4 @@
-﻿namespace MVC.DAL.DatabaseConfig
+﻿namespace MVC.Core.Database.Config
 {
     public interface IMongoConfiguration
     {

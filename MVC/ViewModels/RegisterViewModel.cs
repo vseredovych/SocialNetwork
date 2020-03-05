@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MVC.ViewModels
+namespace MVC.Web.ViewModels
 {
-    public class RegisterModel
+    public class RegisterViewModel
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }

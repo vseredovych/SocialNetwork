@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="DAL\DatabaseStartup\posts.json" />
-    <Content Remove="DAL\DatabaseStartup\users.json" />
+    <Content Remove="Core\Database\Startup\posts.json" />
+    <Content Remove="Core\Database\Startup\users.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="DAL\DatabaseStartup\posts.json" />
-    <None Include="DAL\DatabaseStartup\users.json" />
+    <None Include="Core\Database\Startup\posts.json" />
+    <None Include="Core\Database\Startup\users.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +19,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
     <PackageReference Include="Unity" Version="5.11.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Web\" />
   </ItemGroup>
 
 

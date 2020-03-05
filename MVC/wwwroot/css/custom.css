@@ -1,95 +1,57 @@
-﻿.post-time-right {
-    float: right;
-    color: #aaa;
+﻿/*like button*/
+
+
+
+/*.profile-avatar{
+    max-width: 100px;
+    max-height: 100px;
+}*/
+
+
+.vertical-nav {
+    min-width: 17rem;
+    width: 17rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s;
 }
 
-.post-time-right {
-    float: right;
-    color: #aaa;
+.page-content {
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: all 0.4s;
 }
 
-.break-text p {
-    word-wrap: break-word;
+/* for toggle behavior */
+
+#sidebar.active {
+    margin-left: -17rem;
 }
 
-.profile-text {
-    font-size: small;
+#content.active {
+    width: 100%;
+    margin: 0;
 }
 
-
-.body {
-    background-color: whitesmoke;
-}
-
-.home-view {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin: auto;
-    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23);
-    background-color: rgb(255, 255, 255);
-    padding: 0.8rem;
-    width: 33rem;
-    background-color: white;
-}
-
-.post {
-    background-color: white;
-    border-radius: 1px;
-    border: 1px solid #191919;
-    padding: 5px;
-    /*margin: 5px 0;*/
-}
-
-.post-comment {
-    background-color: #f2f2f2;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    border-radius: 1px;
-    border-color: #ffffff;
-    padding: 5px;
-    margin: 5px 0;
-}
-
-
-/**************/
-svg {
-    fill: rgb(242, 242, 242);
-    height: 1.5rem;
-    width: 1.5rem;
-    margin: 0.2rem;
-}
-
-input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-}
-
-    input[type="radio"] + svg {
-        -webkit-transition: all 0.2s;
-        transition: all 0.2s;
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -17rem;
     }
 
-input + svg {
-    cursor: pointer;
-}
+        #sidebar.active {
+            margin-left: 0;
+        }
 
-input[class="like_btn"]:checked + svg {
-    fill: rgb(0, 0, 0)
-}
+    #content {
+        width: 100%;
+        margin: 0;
+    }
 
-input[class="like_btn"]:hover + svg,
-input[class="like_btn"]:checked + svg {
-    fill: rgb(0, 204, 79);
+        #content.active {
+            margin-left: 17rem;
+            width: calc(100% - 17rem);
+        }
 }
-
-.like_btn {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-.reaction_section {
-    margin: 0px;
-}
-/*like button*/

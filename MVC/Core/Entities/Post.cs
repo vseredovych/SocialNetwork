@@ -1,15 +1,16 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
+using System.Collections.Generic;
 
-namespace MVC.DAL.Entities
+namespace MVC.Core.Entities
 {
     [BsonIgnoreExtraElements]
     public class Post
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string _id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("authorEmail")]
         public string AuthorEmail { get; set; }
@@ -30,7 +31,7 @@ namespace MVC.DAL.Entities
         public int Likes { get; set; }
 
         [BsonElement("comments")]
-        public Comment[] Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
     }
 }

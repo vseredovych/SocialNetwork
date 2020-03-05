@@ -1,13 +1,14 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
-namespace MVC.DAL.Entities
+namespace MVC.Core.Entities
 {
     public class User
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string _id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("name")]
         public string Name { get; set; }
@@ -22,6 +23,6 @@ namespace MVC.DAL.Entities
         public string HashPassword { get; set; }
 
         [BsonElement("friends")]
-        public Friend[] Friends { get; set; }
+        public List<Friend> Friends { get; set; }
     }
 }

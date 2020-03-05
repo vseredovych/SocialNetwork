@@ -6,12 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using MVC.DAL;
-using MVC.DAL.DatabaseConfig;
-using MVC.Models.Mapper;
-using MVC.Services;
+using MVC.Core.Database.Config;
+using MVC.Database;
+using MVC.Web.Interfaces;
+using MVC.Web.Services;
 
-namespace MVC
+namespace MVC.Web
 {
     public class Startup
     {
@@ -34,7 +34,7 @@ namespace MVC
                 sp.GetRequiredService<IOptions<MongoConfiguration>>().Value);
 
             services.AddTransient<IMongoContext, MongoContext>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            //services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             // BLL Mapper Dependency INjection
             services.AddSingleton<IMapper>(ObjectsMapper.CreateMapper());

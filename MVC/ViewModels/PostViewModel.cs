@@ -1,7 +1,8 @@
-﻿using MVC.DAL.Entities;
+﻿using MVC.Core.Entities;
 using System;
+using System.Collections.Generic;
 
-namespace MVC.ViewModels
+namespace MVC.Web.ViewModels
 {
     public class PostViewModel
     {
@@ -19,6 +20,6 @@ namespace MVC.ViewModels
 
         public int Likes { get; set; }
 
-        public Comment[] Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

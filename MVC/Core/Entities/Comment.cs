@@ -2,14 +2,14 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace MVC.DAL.Entities
+namespace MVC.Core.Entities
 {
     [BsonIgnoreExtraElements]
     public class Comment
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string _id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("authorEmail")]
         public string AuthorEmail { get; set; }

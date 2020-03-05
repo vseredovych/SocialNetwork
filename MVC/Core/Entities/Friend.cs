@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace MVC.DAL.Entities
+namespace MVC.Core.Entities
 {
     public class Friend
     {

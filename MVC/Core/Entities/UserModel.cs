@@ -1,6 +1,6 @@
-﻿namespace MVC.Models
+﻿namespace MVC.Core.Entities
 {
-    public class UserModel
+    public class UserModelasdasd
     {
         public int Id { get; set; }
         public string Email { get; set; }
