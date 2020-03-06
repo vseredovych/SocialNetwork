@@ -8,10 +8,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MVC.Core.Database.Config;
 using MVC.Database;
-using MVC.Web.Interfaces;
-using MVC.Web.Services;
+using MVC.Interfaces;
+using MVC.Services;
 
-namespace MVC.Web
+namespace MVC
 {
     public class Startup
     {

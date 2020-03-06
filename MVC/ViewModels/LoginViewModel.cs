@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MVC.Web.ViewModels
+namespace MVC.ViewModels
 {
     public class LoginViewModel
     {

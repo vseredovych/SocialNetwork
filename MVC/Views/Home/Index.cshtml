@@ -1,43 +1,36 @@
-﻿@model IEnumerable<MVC.Web.ViewModels.PostViewModel>
+﻿@model IEnumerable<MVC.ViewModels.PostViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-
-<style>
-</style>
-
 <script language="javascript">
-    function LikePost(form) {
-        $(form).parents('li').remove();
-    }
+    //function LikePost(form) {
+    //    $(form).parents('li').remove();
+    //}
     function updatePostLikes(postId)
     {
         id = "like_info_" + postId;
         el = document.getElementById(id);
         el.textContent = parseInt(el.textContent) + 1;
     }
-    //$(postId).html(a);
-    //and probably call document.forms[0].submit();
 </script>
 
 <section>
-    @*@foreach (var comment in item.Comments)
-        {
-            <div class="col-12 break-text post-comment">
-                <p>@(comment.AuthorName + ": " + comment.Text)</p>
-            </div>*@
-
-    <ul class="list-group list-group-lg list-group-flush list my--4">
+    <div class="container-fluid">
+        <form class="form-group col align-items-center" asp-controller="Home" asp-action="AddPost">
+            <label for="postText">AddPost</label>
+            <textarea name="postText" type="textarea" class="form-control" placeholder="Enter Post Text"></textarea>
+            <button type="submit" class="btn btn-sm btn-danger float-right">Send</button>
+         </form>
+    </div>
+    <ul class="list-group list-group-lg list my--4">
         @foreach (var post in Model)
         {
-            <li class="list-group-item px-0">
-                <div class="row align-items-center">
-                    <div class="col-2" style="width: 100%">
-                        <span class="avatar avatar-lg">
-                            <img class="img-fluid avatar-img" src="https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png" alt="">
-                        </span>
-                    </div>
+            <li class="list-grop list-group-item px-0">
+                <div class="row ml-0 align-items-center">
+                    <span class="avatar avatar-lg rounded-circle">
+                        <img class="img-fluid avatar-img profile-avatar" src="https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png" alt="">
+                     </span>
                     <div class="col ml--2">
                         <h4 class="card-title mb-1">
                             <a href="#!">@(post.AuthorName + " " + post.AuthorSurname)</a>
@@ -63,26 +56,22 @@
                         </form>
                     </div>
                     <div class="col-12">
-                        <form class="align-items-center" asp-controller="Home" asp-action="AddComment">
-                            <label>Comment</label>
-                            <input name="commentText" type="text" class="form-control" id="@("comment_text_" + post.Id)" placeholder="Enter Comment">
-                            <button type="submit" class="btn btn-sm btn-danger">Send</button>
+                        <form class="form-group align-items-center" asp-controller="Home" asp-action="AddComment">
+                            <label for="@("comment_text_" + post.Id)">Comment:</label>
+                            <textarea name="commentText" type="textarea" class="form-control" id="@("comment_text_" + post.Id)" placeholder="Enter Comment"></textarea>
+                            <button type="submit" class="btn btn-sm btn-danger float-right">Send</button>
                         </form>
-                     
                     </div>
                     <div class="col-12">
                         <ul class="list-group list-group-lg list-group-flush list my--4">
                             @foreach (var comment in post.Comments)
                             {
                                 <li class="list-group-item ml-5 mr-2 px-0">
-                                    <div class="row align-items-center">
-
-                                        <div class="col-2" style="width: 100%">
-                                            <span class="avatar avatar-lg">
-                                                <img class="img-fluid avatar-img rounded-circle profile-avatar" src="https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png" alt="">
-                                            </span>
-                                        </div>
-                                        <div class="col-8 bg-light">
+                                    <div class="row ml-0 align-items-center">
+                                        <span class="avatar avatar-lg">
+                                            <img class="img-fluid avatar-img rounded-circle profile-avatar" src="https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png" alt="">
+                                        </span>
+                                        <div class="col">
                                             <h4 class="card-title small mb-1">
                                                 <a href="#!">@(comment.AuthorName + " " + comment.AuthorSurname)</a>
                                             </h4>

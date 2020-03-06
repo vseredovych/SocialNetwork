@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MVC.Core.Entities;
 using MVC.ViewModels;
-using MVC.Web.ViewModels;
 
 namespace MVC.Database
 {
@@ -15,7 +14,6 @@ namespace MVC.Database
                 cfg.CreateMap<Post, PostViewModel>();
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<UserViewModel, User>();
-
                 //cfg.CreateMap<User, UserViewModel>()
                 //.ForMember(x => x.Id,
                 //           m => m.MapFrom(y => y._id));

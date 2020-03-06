@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MVC.Web.ViewModels
+namespace MVC.ViewModels
 {
     public class PostViewModel
     {

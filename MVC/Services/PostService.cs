@@ -3,14 +3,14 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MVC.Core.Database.Config;
 using MVC.Core.Entities;
-using MVC.Web.Interfaces;
-using MVC.Web.ViewModels;
+using MVC.Interfaces;
+using MVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVC.Web.Services
+namespace MVC.Services
 {
     public class PostService : IPostService
     {

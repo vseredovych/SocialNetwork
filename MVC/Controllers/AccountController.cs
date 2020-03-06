@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MVC.Web.Interfaces;
-using MVC.Web.ViewModels;
+using MVC.Interfaces;
+using MVC.ViewModels;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace MVC.Web.Controllers
+namespace MVC.Controllers
 {
     public class AccountController : Controller
     {
@@ -32,6 +33,21 @@ namespace MVC.Web.Controllers
             return View();
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var a = User.Identity.Name;
+            var viewModel = await _userService.GetByEmailAsync(User.Identity.Name);
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -43,7 +59,7 @@ namespace MVC.Web.Controllers
 
                 if (isAuthorized)
                 {
-                    await Authenticate(model.Email); // аутентификация
+                    await Authenticate(model.Email);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -51,12 +67,7 @@ namespace MVC.Web.Controllers
             }
             return View(model);
         }
-        [HttpGet]
 
-        public IActionResult Register()
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,12 +78,18 @@ namespace MVC.Web.Controllers
                 bool isUserExists = await _userService.IsUserExistsAsync(model.Email);
                 if (!isUserExists)
                 {
-                    //db.Users.Add(new UserModel { Email = model.Email, Password = model.Password });
-                    //await db.SaveChangesAsync();
-
-                    //await Authenticate(model.Email); // аутентификация
-
-                    return RedirectToAction("Index", "Home");
+                    if (model.Password == model.ConfirmPassword)
+                    {
+                        var newUser = new UserViewModel()
+                        {
+                            Email = model.Email,
+                            HashPassword = model.Password,
+                            Name = "Anonym",
+                            Surname = "Anonymus"
+                        };
+                        _userService.InsertUserAsync(newUser);
+                    }
+                    return RedirectToAction("Profile", "Account");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -86,12 +103,12 @@ namespace MVC.Web.Controllers
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
-
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

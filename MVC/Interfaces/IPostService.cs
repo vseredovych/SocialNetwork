@@ -1,9 +1,9 @@
 ﻿using MVC.Core.Entities;
-using MVC.Web.ViewModels;
+using MVC.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MVC.Web.Interfaces
+namespace MVC.Interfaces
 {
     public interface IPostService
     {

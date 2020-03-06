@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MVC.Web.ViewModels
+namespace MVC.ViewModels
 {
     public class CommentViewModel
     {

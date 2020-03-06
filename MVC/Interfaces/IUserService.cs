@@ -3,7 +3,7 @@ using MVC.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MVC.Web.Interfaces
+namespace MVC.Interfaces
 {
     public interface IUserService
     {
@@ -11,7 +11,7 @@ namespace MVC.Web.Interfaces
         Task<UserViewModel> GetByEmailAsync(string email);
         Task<bool> IsUserExistsAsync(string email);
         Task<bool> CheckPasswordByEmailAsync(string email, string password);
-
+        void InsertUserAsync(UserViewModel userModel);
         //Task<IEnumerable<User>> GetAllAsync();
         //Task<User> GetByEmailAsync(string email);
         //Task<bool> IsUserExistsAsync(string email);
