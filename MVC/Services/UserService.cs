@@ -67,52 +67,32 @@ namespace MVC.Services
             }
             return false;
         }
+        public async Task<ProfileViewModel> UpdateUserByEmailAsync(ProfileViewModel userModel)
+        {
+            var oldUser = await GetByEmailAsync(userModel.Email);
+
+            var user = _mapper.Map<User>(userModel);
+            user.Id = oldUser.Id;
+
+            if (userModel.Password == null)
+            {
+                user.HashPassword = oldUser.HashPassword;
+            }
+
+            var builder = Builders<User>.Filter;
+            var filter = builder.Eq(el => el.Email, userModel.Email);
+            var options = new FindOneAndUpdateOptions<Post>();
+            options.ReturnDocument = ReturnDocument.After;
+
+            await _context.Users.ReplaceOneAsync(filter, user);
+            return userModel;
+        }
+
+        public async Task<ProfileViewModel> GetProfileModel(UserViewModel userModel)
+        {
+            var user = await GetByEmailAsync(userModel.Email);
+            var updateModel = _mapper.Map<ProfileViewModel>(userModel);
+            return updateModel;
+        }
     }
 }
-
-
-//    public class UserService : IUserService
-//    {
-//        private readonly IUnitOfWork _unitOfWork;
-//        private readonly IMapper _mapper;
-
-//        public UserService(IUnitOfWork unitOfWork, IMapper mapper)
-//        {
-//            _unitOfWork = unitOfWork;
-//            _mapper = mapper;
-//        }
-//        public async Task<IEnumerable<User>> GetAllAsync()
-//        {
-//            List<User> users = new List<User>();
-
-//            //foreach (var user in await _unitOfWork.UsersRepository.GetAllAsync())
-//            //{
-//            //    var dto = _mapper.Map<User, User>(user);
-//            //    users.Add(dto);
-//            //}
-//            return users;
-//        }
-//        public async Task<User> GetByEmailAsync(string email)
-//        {
-//            List<User> users = new List<User>();
-
-//            var user = await _unitOfWork.UsersRepository.GetByEmailAsync(email);
-//            var dto = _mapper.Map<User, User>(user);
-
-//            return dto;
-//        }
-
-//        
-//        public async Task<bool> CheckPasswordByEmailAsync(string email, string password)
-//        {
-//            List<User> users = new List<User>();
-
-//            var user = await _unitOfWork.UsersRepository.GetByEmailAsync(email);
-//            if (user.HashPassword == password)
-//            {
-//                return true;
-//            }
-//            return false;
-//        }
-
-//    }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,26 +21,59 @@ namespace MVC.Controllers
         public AccountController(
             ILogger<AccountController> logger,
             IPostService postService,
-            IUserService userService)
+            IUserService userService
+            )
         {
             _logger = logger;
             _postService = postService;
             _userService = userService;
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
-            var a = User.Identity.Name;
-            var viewModel = await _userService.GetByEmailAsync(User.Identity.Name);
-            return View(viewModel);
+            var authorizedUser = await _userService.GetByEmailAsync(User.Identity.Name);
+            var profileModel = await _userService.GetProfileModel(authorizedUser);
+            profileModel.IsAuthorized = true;
+
+            return View(profileModel);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> ProfileByEmail(string authorEmail)
+        {
+            var authorizedUser = await _userService.GetByEmailAsync(User.Identity.Name);
+
+            var userModel = await _userService.GetByEmailAsync(authorEmail);
+            var profileModel = await _userService.GetProfileModel(userModel);
+
+            if (authorizedUser.Email == profileModel.Email)
+            {
+                profileModel.IsAuthorized = true;
+            }
+            return View("Profile", profileModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateProfile(ProfileViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userProfile = await _userService.UpdateUserByEmailAsync(viewModel);
+                return RedirectToAction("Profile", "Account");
+            }
+            ModelState.AddModelError("", "Wrong Password or Login");
+            return NoContent();
+        }
+
+        #region Authentication
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -63,11 +97,10 @@ namespace MVC.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                ModelState.AddModelError("", "Wrong Password or Login");
             }
             return View(model);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -92,7 +125,7 @@ namespace MVC.Controllers
                     return RedirectToAction("Profile", "Account");
                 }
                 else
-                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                    ModelState.AddModelError("", "Wrong Password or Login");
             }
             return View(model);
         }
@@ -114,5 +147,7 @@ namespace MVC.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
         }
+
+        #endregion
     }
 }

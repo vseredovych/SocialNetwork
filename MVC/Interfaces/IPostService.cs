@@ -13,11 +13,6 @@ namespace MVC.Interfaces
         Task<PostViewModel> IncPostLikesAsync(string id);
         Task<PostViewModel> DicPostLikesAsync(string id);
         void InsertPostAsync(Post post);
-
-        //Task<IEnumerable<PostViewModel>> GetAllAsync();
-        //Task<int> GetLikesAsync(string id);
-        //Task<PostViewModel> LikePostAsync(string id);
-        //Task<PostViewModel> DislikePostAsync(string id);
-        //public void InsertPost(PostViewModel postModel);
+        void InsertCommentAsync(Comment comment, string postId);
     }
 }

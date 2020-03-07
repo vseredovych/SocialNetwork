@@ -14,6 +14,8 @@ namespace MVC.Database
                 cfg.CreateMap<Post, PostViewModel>();
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<UserViewModel, User>();
+                cfg.CreateMap<UserViewModel, ProfileViewModel>();
+                cfg.CreateMap<ProfileViewModel, User>();
                 //cfg.CreateMap<User, UserViewModel>()
                 //.ForMember(x => x.Id,
                 //           m => m.MapFrom(y => y._id));

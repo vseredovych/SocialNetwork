@@ -12,9 +12,7 @@ namespace MVC.Interfaces
         Task<bool> IsUserExistsAsync(string email);
         Task<bool> CheckPasswordByEmailAsync(string email, string password);
         void InsertUserAsync(UserViewModel userModel);
-        //Task<IEnumerable<User>> GetAllAsync();
-        //Task<User> GetByEmailAsync(string email);
-        //Task<bool> IsUserExistsAsync(string email);
-        //Task<bool> CheckPasswordByEmailAsync(string email, string password);
+        Task<ProfileViewModel> UpdateUserByEmailAsync(ProfileViewModel userModel);
+        Task<ProfileViewModel> GetProfileModel(UserViewModel model);
     }
 }
