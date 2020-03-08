@@ -38,6 +38,16 @@ namespace MVC.Services
             var user = _mapper.Map<UserViewModel>(result.SingleOrDefault(u => u.Email == email));
             return user;
         }
+        public async Task<UserViewModel> GetByIdAsync(string id)
+        {
+            var result = await _context
+                .Users
+                .AsQueryable()
+                .ToListAsync();
+
+            var user = _mapper.Map<UserViewModel>(result.SingleOrDefault(u => u.Id == id));
+            return user;
+        }
         public async void InsertUserAsync(UserViewModel userModel)
         {
             var user = _mapper.Map<User>(userModel);
@@ -67,7 +77,7 @@ namespace MVC.Services
             }
             return false;
         }
-        public async Task<ProfileViewModel> UpdateUserByEmailAsync(ProfileViewModel userModel)
+        public async Task<ProfileViewModel> UpdateUserAsync(ProfileViewModel userModel)
         {
             var oldUser = await GetByEmailAsync(userModel.Email);
 
@@ -93,6 +103,54 @@ namespace MVC.Services
             var user = await GetByEmailAsync(userModel.Email);
             var updateModel = _mapper.Map<ProfileViewModel>(userModel);
             return updateModel;
+        }
+
+        //public async Task<IEnumerable<UserViewModel>> GetFriendUsersByIdAsync(string userId)
+        //{
+        //    var builder = Builders<User>.Filter;
+        //    var filter = builder.Eq(el => el.Id, userId);
+
+        //    var result = await _context.Users.Find<User>(filter).SingleAsync();
+
+        //    var friends = new List<UserViewModel>();
+        //    foreach (var id in result.Friends)
+        //    {
+        //        friends.Add(await GetByEmailAsync(id.Email));
+        //    }
+
+        //    return friends;
+        //}
+        public void AddFriend(string requesterEmail, string userEmail)
+        {
+            AddFrienddByEmailAsync(requesterEmail, userEmail);
+            AddFrienddByEmailAsync(userEmail, requesterEmail);
+        }
+        public void RemoveFriend(string requesterEmail, string userEmail)
+        {
+            RemoveFriendByEmailAsync(requesterEmail, userEmail);
+            RemoveFriendByEmailAsync(userEmail, requesterEmail);
+        }
+        private async void AddFrienddByEmailAsync(string requesterEmail, string userEmail)
+        {
+            var friend = _mapper.Map<Friend>(await GetByEmailAsync(userEmail));
+
+
+            var filter = Builders<User>.Filter.Eq(el => el.Email, requesterEmail);
+            var update = Builders<User>.Update
+                    .Push<Friend>(el => el.Friends, friend);
+
+            await _context.Users.FindOneAndUpdateAsync(filter, update);
+        }
+        private async void RemoveFriendByEmailAsync(string requesterEmail, string userEmail)
+        {
+            var friend = _mapper.Map<Friend>(await GetByEmailAsync(userEmail));
+
+            var filter = Builders<User>.Filter.Eq(el => el.Email, requesterEmail);
+            var update = Builders<User>.Update
+                    .Pull<Friend>(el => el.Friends, friend);
+
+            await _context.Users.FindOneAndUpdateAsync(filter, update);
+
         }
     }
 }

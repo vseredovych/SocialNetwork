@@ -24,5 +24,8 @@ namespace MVC.Core.Entities
 
         [BsonElement("friends")]
         public List<Friend> Friends { get; set; }
+
+        [BsonElement("imageSource")]
+        public string ImageSource { get; set; }
     }
 }

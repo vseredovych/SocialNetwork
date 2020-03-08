@@ -20,13 +20,13 @@ namespace MVC.Core.Entities
         [BsonElement("authorSurname")]
         public string AuthorSurname { get; set; }
 
+        [BsonElement("authorImageSource")]
+        public string AuthorImageSource { get; set; }
+
         [BsonElement("timestamp")]
         public DateTime Timestamp { get; set; }
 
         [BsonElement("text")]
         public string Text { get; set; }
-
-        [BsonElement("likes")]
-        public int Likes { get; set; }
     }
 }

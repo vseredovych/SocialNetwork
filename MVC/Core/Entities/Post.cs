@@ -21,6 +21,9 @@ namespace MVC.Core.Entities
         [BsonElement("authorSurname")]
         public string AuthorSurname { get; set; }
 
+        [BsonElement("authorImageSource")]
+        public string AuthorImageSource { get; set; }
+
         [BsonElement("timestamp")]
         public DateTime Timestamp { get; set; }
 
@@ -28,7 +31,10 @@ namespace MVC.Core.Entities
         public string Text { get; set; }
 
         [BsonElement("likes")]
-        public int Likes { get; set; }
+        public List<Like> Likes { get; set; }
+        
+        [BsonElement("views")]
+        public int Views { get; set; } = 0;
 
         [BsonElement("comments")]
         public List<Comment> Comments { get; set; }

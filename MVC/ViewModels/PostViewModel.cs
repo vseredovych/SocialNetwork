@@ -14,11 +14,15 @@ namespace MVC.ViewModels
 
         public string AuthorSurname { get; set; }
 
+        public string AuthorImageSource { get; set; }
+
         public DateTime Timestamp { get; set; }
 
         public string Text { get; set; }
 
-        public int Likes { get; set; }
+        public int Views{ get; set; }
+
+        public List<Like> Likes { get; set; }
 
         public List<Comment> Comments { get; set; }
     }

@@ -9,10 +9,13 @@ namespace MVC.Interfaces
     {
         Task<IEnumerable<UserViewModel>> GetAllAsync();
         Task<UserViewModel> GetByEmailAsync(string email);
+        Task<UserViewModel> GetByIdAsync(string id);
         Task<bool> IsUserExistsAsync(string email);
         Task<bool> CheckPasswordByEmailAsync(string email, string password);
         void InsertUserAsync(UserViewModel userModel);
-        Task<ProfileViewModel> UpdateUserByEmailAsync(ProfileViewModel userModel);
+        void AddFriend(string requesterEmail, string userEmail);
+        void RemoveFriend(string requesterEmail, string userEmail);
         Task<ProfileViewModel> GetProfileModel(UserViewModel model);
+        Task<ProfileViewModel> UpdateUserAsync(ProfileViewModel userModel);
     }
 }

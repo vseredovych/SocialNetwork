@@ -29,8 +29,8 @@ namespace MVC.Controllers
             _userService = userService;
         }
 
-        [Authorize]
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Profile()
         {
             var authorizedUser = await _userService.GetByEmailAsync(User.Identity.Name);
@@ -40,8 +40,8 @@ namespace MVC.Controllers
             return View(profileModel);
         }
 
-        [Authorize]
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> ProfileByEmail(string authorEmail)
         {
             var authorizedUser = await _userService.GetByEmailAsync(User.Identity.Name);
@@ -62,7 +62,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userProfile = await _userService.UpdateUserByEmailAsync(viewModel);
+                var userProfile = await _userService.UpdateUserAsync(viewModel);
                 return RedirectToAction("Profile", "Account");
             }
             ModelState.AddModelError("", "Wrong Password or Login");

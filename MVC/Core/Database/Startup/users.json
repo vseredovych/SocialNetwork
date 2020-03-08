@@ -1,80 +1,103 @@
 [
-{
+  {
     "name": "admin",
     "surname": "admin",
     "email": "admin@gmail.com",
     "hashPassword": "xHashPasswordx",
+    "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png",
     "friends": [
-        {
-            "email": "victor.seredovich@gmail.com"
-        }
+      {
+        "name": "Viktor",
+        "surname": "Seredovych",
+        "email": "victor.seredovich@gmail.com",
+        "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png"
+      }
     ]
-},
-{
+  },
+  {
     "name": "Viktor",
     "surname": "Seredovych",
     "email": "victor.seredovich@gmail.com",
     "hashPassword": "xHashPasswordx",
+    "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png",
     "friends": [
-        {
-            "email": "know.nothing@what.why"
-        },
-        {
-            "email": "jensen@silent.nope"
-        },
-        {
-            "email": "bob.ros@paint.com"
-        },
-        {
-            "email": "admin@gmail.com"
-        }
+      {
+        "name": "Jhon",
+        "surname": "Snow",
+        "email": "know.nothing@what.why",
+        "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png"
+      },
+      {
+        "name": "Adam",
+        "surname": "Jensen",
+        "email": "jensen@silent.nope",
+        "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png"
+      },
+      {
+        "name": "Bob",
+        "surname": "Ross",
+        "email": "bob.ros@paint.com",
+        "imageSource": "https://discordemoji.com/assets/emoji/coolstorybob.png"
+      },
+      {
+        "name": "admin",
+        "surname": "admin",
+        "email": "admin@gmail.com",
+        "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png"
+      }
     ]
-},
-{
+  },
+  {
     "name": "Adam",
     "surname": "Jensen",
     "email": "jensen@silent.nope",
     "hashPassword": "xHashPasswordx",
+    "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png",
     "friends": [
-        {
-            "email": "victor.seredovich@gmail.com"
-        }
+      {
+        "name": "Viktor",
+        "surname": "Seredovych",
+        "email": "victor.seredovich@gmail.com",
+        "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png"
+      }
     ]
-},
-{
+  },
+  {
     "name": "Jhon",
     "surname": "Snow",
     "email": "know.nothing@what.why",
     "hashPassword": "xHashPasswordx",
+    "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png",
     "friends": [
-        {
-            "email": "victor.seredovich@gmail.com"
-        }
+      {
+        "name": "Viktor",
+        "surname": "Seredovych",
+        "email": "victor.seredovich@gmail.com",
+        "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png"
+      }
     ]
-},
-{
+  },
+  {
     "name": "Bob",
     "surname": "Ross",
     "email": "bob.ros@paint.com",
     "hashPassword": "xHashPasswordx",
+    "imageSource": "https://discordemoji.com/assets/emoji/coolstorybob.png",
     "friends": [
-        {
-            "email": "victor.seredovich@gmail.com"
-        }
+      {
+        "name": "Viktor",
+        "surname": "Seredovych",
+        "email": "victor.seredovich@gmail.com",
+        "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png"
+      }
     ]
-},
-{
+  },
+  {
     "name": "Igor",
     "surname": "Petruk",
-    "email": "prahma.l@everyshop.us",
+    "email": "ipetr@email.com",
     "hashPassword": "xHashPasswordx",
+    "imageSource": "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png",
     "friends": []
-},
-{
-    "name": "Zakaria",
-    "surname": "Barrera",
-    "email": "7morga@vendasml.ml",
-    "hashPassword": "xHashPasswordx",
-    "friends": []
-}
+  }
 ]

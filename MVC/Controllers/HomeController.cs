@@ -27,64 +27,14 @@ namespace MVC.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var viewModel = await _postService.GetAllAsync();
-
-            return View(viewModel);
+            return RedirectToAction("Posts", "Posts");
         }
 
-        [Authorize]
-        public async Task<IActionResult> LikePost(string postId)
-        {
-            var post = await _postService.IncPostLikesAsync(postId);
-            return NoContent();
-        }
-
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> AddPost(string postText)
-        {
-            //var post = await _postService.LikePostAsync(commentText);
-            var viewModel = await _postService.GetAllAsync();
-            var user = await _userService.GetByEmailAsync(User.Identity.Name);
-            var newel = new Post()
-            {
-                AuthorEmail = user.Email,
-                AuthorName = user.Name,
-                AuthorSurname = user.Surname,
-                Text = postText,
-                Likes = 0,
-                Timestamp = DateTime.Now,
-                Comments = new List<Comment>()
-            };
-
-            _postService.InsertPostAsync(newel);
-            return RedirectToAction("Index", "Home");
-        }
-
-        [Authorize]
-        public async Task<IActionResult> AddComment(string commentText, string postId)
-        {
-            //var post = await _postService.LikePostAsync(commentText);
-            var viewModel = await _postService.GetAllAsync();
-            var user = await _userService.GetByEmailAsync(User.Identity.Name);
-            var newel = new Comment()
-            {
-                AuthorEmail = user.Email,
-                AuthorName = user.Name,
-                AuthorSurname = user.Surname,
-                Text = commentText,
-                Likes = 0,
-                Timestamp = DateTime.Now
-            };
-
-            _postService.InsertCommentAsync(newel, postId);
-
-            return RedirectToAction("Index", "Home");
-        }
-
+   
         [Authorize]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
