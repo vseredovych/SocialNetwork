@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MVC.Core.Entities;
 using MVC.Interfaces;
 using MVC.ViewModels;
 using System.Collections.Generic;
@@ -117,8 +118,10 @@ namespace MVC.Controllers
                         {
                             Email = model.Email,
                             HashPassword = model.Password,
-                            Name = "Anonym",
-                            Surname = "Anonymus"
+                            Name = "Noname",
+                            Surname = "Nosurname",
+                            ImageSource = "https://www.pinclipart.com/picdir/big/420-4203805_alto-saxophone-clipart.png",
+                            Friends = new List<Friend>()
                         };
                         _userService.InsertUserAsync(newUser);
                     }

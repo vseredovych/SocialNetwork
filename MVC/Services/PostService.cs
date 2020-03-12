@@ -28,7 +28,7 @@ namespace MVC.Services
         {
             var result = await _context.Posts.AsQueryable().ToListAsync();
 
-            return result.Select(p => _mapper.Map<PostViewModel>(p));
+            return result.Select(p => _mapper.Map<PostViewModel>(p)).OrderBy(p => p.Timestamp).Reverse();
         }
         public async Task<IEnumerable<PostViewModel>> GetByAuthorAsync(string author)
         {

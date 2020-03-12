@@ -7,11 +7,56 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/custom.css" />
+    <style>
+        .like-checkbox {
+            display: none;
+        }
+
+        .post {
+            background-color: white;
+        }
+
+        .comment-content {
+            background-color: #f0f0ed;
+        }
+
+
+        body {
+            padding-top: 70px;
+            background-color: #f0f0ed;
+        }
+
+        .header {
+            background: #162e28;
+        }
+
+        .profile-avatar {
+            display: block;
+            max-width: 70px;
+            max-height: 70px;
+            min-height: 70px;
+            min-width: 70px;
+            width: auto;
+            height: auto;
+            object-fit: cover
+        }
+
+        .post-text{
+            padding-left: 70px
+        }
+
+        body {
+            padding-top: 70px;
+            background-color: #f0f0ed;
+        }
+
+
+    </style>
 </head>
 <body class="body"> 
     <header>
-        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+        <nav class="header navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="header-nav container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MVC</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -20,16 +65,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">People</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Index">People</a>
                         </li>
                         <li class="nav-item float-right">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                         </li>
                     </ul>
                 </div>

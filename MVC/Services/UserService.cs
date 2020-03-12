@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MVC.Core.Database.Config;
 using MVC.Core.Entities;
-using MVC.ViewModels;
 using MVC.Interfaces;
+using MVC.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
-using MongoDB.Bson;
 
 namespace MVC.Services
 {
@@ -84,9 +84,15 @@ namespace MVC.Services
             var user = _mapper.Map<User>(userModel);
             user.Id = oldUser.Id;
 
+            user.Friends = oldUser.Friends;
+
             if (userModel.Password == null)
             {
                 user.HashPassword = oldUser.HashPassword;
+            }
+            if (userModel.ImageSource == null)
+            {
+                user.ImageSource = oldUser.ImageSource;
             }
 
             var builder = Builders<User>.Filter;
@@ -95,6 +101,11 @@ namespace MVC.Services
             options.ReturnDocument = ReturnDocument.After;
 
             await _context.Users.ReplaceOneAsync(filter, user);
+
+            UpdateFriendsUserInfo(user);
+            UpdatePostsUserInfo(user);
+            UpdateCommentsUserInfo(user);
+
             return userModel;
         }
 
@@ -105,21 +116,6 @@ namespace MVC.Services
             return updateModel;
         }
 
-        //public async Task<IEnumerable<UserViewModel>> GetFriendUsersByIdAsync(string userId)
-        //{
-        //    var builder = Builders<User>.Filter;
-        //    var filter = builder.Eq(el => el.Id, userId);
-
-        //    var result = await _context.Users.Find<User>(filter).SingleAsync();
-
-        //    var friends = new List<UserViewModel>();
-        //    foreach (var id in result.Friends)
-        //    {
-        //        friends.Add(await GetByEmailAsync(id.Email));
-        //    }
-
-        //    return friends;
-        //}
         public void AddFriend(string requesterEmail, string userEmail)
         {
             AddFrienddByEmailAsync(requesterEmail, userEmail);
@@ -130,6 +126,7 @@ namespace MVC.Services
             RemoveFriendByEmailAsync(requesterEmail, userEmail);
             RemoveFriendByEmailAsync(userEmail, requesterEmail);
         }
+
         private async void AddFrienddByEmailAsync(string requesterEmail, string userEmail)
         {
             var friend = _mapper.Map<Friend>(await GetByEmailAsync(userEmail));
@@ -152,5 +149,50 @@ namespace MVC.Services
             await _context.Users.FindOneAndUpdateAsync(filter, update);
 
         }
+        private async void UpdateFriendsUserInfo(User user)
+        {
+            var update = Builders<User>.Update
+                .Set(el => el.Friends[-1].Name, user.Name)
+                .Set(el => el.Friends[-1].Surname, user.Surname)
+                .Set(el => el.Friends[-1].ImageSource, user.ImageSource);
+
+            _context.Users.UpdateMany<User>(
+                el => el.Friends.Any(el => el.Email == user.Email), update
+                );
+        }
+
+        private async void UpdatePostsUserInfo(User user)
+        {
+            var update = Builders<Post>.Update
+                .Set(el => el.AuthorName, user.Name)
+                .Set(el => el.AuthorSurname, user.Surname)
+                .Set(el => el.AuthorImageSource, user.ImageSource);
+
+            _context.Posts.UpdateMany<Post>(
+                el => el.AuthorEmail == user.Email, update
+                );
+        }
+        private async void UpdateCommentsUserInfo(User user)
+        {
+            //                el => el.Comments.Where(el => el.AuthorEmail == user.Email)
+            var update = Builders<Post>.Update
+               .Set("comments.$[g].authorName", user.Name)
+               .Set("comments.$[g].authorSurname", user.Surname)
+               .Set("comments.$[g].authorImageSource", user.ImageSource);
+
+            var filter = Builders<Post>.Filter
+                .Where(x => x.Comments.Any(c => c.AuthorEmail == user.Email));
+
+            var updateOprions = new UpdateOptions
+            {
+                ArrayFilters = new List<ArrayFilterDefinition>
+                 {
+                    new BsonDocumentArrayFilterDefinition<BsonDocument>(new BsonDocument("g.authorEmail", user.Email)),
+                 }
+            };
+
+            await _context.Posts.UpdateManyAsync(filter, update, updateOprions);
+        }
+
     }
 }
