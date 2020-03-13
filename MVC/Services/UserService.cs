@@ -156,7 +156,7 @@ namespace MVC.Services
                 .Set(el => el.Friends[-1].Surname, user.Surname)
                 .Set(el => el.Friends[-1].ImageSource, user.ImageSource);
 
-            _context.Users.UpdateMany<User>(
+            await _context.Users.UpdateManyAsync<User>(
                 el => el.Friends.Any(el => el.Email == user.Email), update
                 );
         }
@@ -168,7 +168,7 @@ namespace MVC.Services
                 .Set(el => el.AuthorSurname, user.Surname)
                 .Set(el => el.AuthorImageSource, user.ImageSource);
 
-            _context.Posts.UpdateMany<Post>(
+            await _context.Posts.UpdateManyAsync<Post>(
                 el => el.AuthorEmail == user.Email, update
                 );
         }

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<UserViewModel>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<script>
+    function deleteItem(form) {
+        $(form).parents('li').remove();
+    }
+</script>
+
+<ul class="list-group list-group-lg list-group-flush list my--4">
+    @foreach (var user in Model)
+    {
+        <li class="list-group-item mb-1 px-0">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <span class="avatar avatar-lg">
+                        <img class="img-fluid avatar-img rounded-circle profile-avatar" src="@user.ImageSource" alt="">
+                    </span>
+                </div>
+                <div class="col ml--2">
+                    <h4 class="card-title mb-1">
+                        <a asp-action="ProfileByEmail" asp-controller="Account" asp-route-authorEmail="@user.Email">@(user.Name + " " + user.Surname)</a>
+                    </h4>
+                    <p class="card-text small text-muted mb-1">
+                        @user.Email
+                    </p>
+                </div>
+                <div class="col-auto mr-2">
+                    @if (user.Email != User.Identity.Name)
+                    {
+                        @if (user.Friends.AsQueryable().Any(el => el.Email == User.Identity.Name))
+                        {
+                        <form asp-action="RemoveFriend" asp-controller="Users" asp-route-userEmail="@user.Email">
+                            <button type="submit" class="btn btn-sm btn-primary d-none d-md-inline-block">
+                                Remove
+                            </button>
+                        </form>
+                        }
+                        else
+                        {
+                        <form asp-action="AddFriend" asp-controller="Users" asp-route-userEmail="@user.Email">
+                            <button type="submit" class="btn btn-sm btn-primary d-none d-md-inline-block">
+                                Add
+                            </button>
+                        </form>
+                        }
+                    }
+                </div>
+            </div>
+        </li>
+    }
+</ul>

@@ -1,0 +1,146 @@
+﻿
+@model ProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<script>
+        function update() {
+            var el = document.getElementById("update-text");
+            el.textContent = "Updated!";
+        }
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 order-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+                @if (Model.IsAuthorized)
+                {
+                    <li class="nav-item">
+                        <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">User Profile</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <h6>Name</h6>
+                            <p>
+                                @Model.Name
+                            </p>
+                            <h6>Surname</h6>
+                            <p>
+                                @Model.Surname
+                            </p>
+                            <h6>Email</h6>
+                            <p>
+                                @Model.Email
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.IsAuthorized)
+                {
+                <div class="tab-pane" id="edit">
+                    <form id="profile" asp-action="UpdateProfile" asp-controller="Account" asp-anti-forgery="true">
+                        <div class="validation" asp-validation-summary="ModelOnly" />
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label form-control-label">Email</label>
+                            <div class="col-9">
+                                <input asp-for="Email" type="text" readonly class="form-control-plaintext" id="inputEmail" placeholder="Input Surname" value="@Model.Email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label form-control-label">Name</label>
+                            <div class="col-9">
+                                <input asp-for="Name" type="text" class="form-control" id="inputName" placeholder="Name" value=@Model.Name>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label form-control-label">Surname</label>
+                            <div class="col-9">
+                                <input asp-for="Surname" type="text" class="form-control" id="inputSurname" placeholder="Input Surname" value="@Model.Surname">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label form-control-label">Image Source</label>
+                            <div class="col-9">
+                                <input asp-for="ImageSource" type="text" class="form-control" id="inputImageSource" placeholder="Input Image Source" value="@Model.ImageSource">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label form-control-label">Password</label>
+                            <div class="col-9">
+                                <input asp-for="Password" type="text" class="form-control" id="inputNewPassword" placeholder="Input New Password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label form-control-label">Confirm password</label>
+                            <div class="col-9">
+                                <input asp-for="ConfirmPassword" type="text" class="form-control" id="inputNewPassword" placeholder="Input New Password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div>
+                                <input type="submit" onclick="update()" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                        <p id="update-text" class="text-success"></p>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="col-4 order-1 text-center">
+            <img src="@Model.ImageSource" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+        </div>
+        <div class="col-12 order-12">
+            <div>
+                @if  (Model.Friends.Count != 0) 
+                {
+                    <h3>Friends</h3>
+                }
+            </div>
+            <ul class="list-group list-group-lg list-group-flush list my--4">
+                @foreach (var user in Model.Friends)
+                {
+                    <li class="list-group-item mb-1 px-0">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <span class="avatar avatar-lg">
+                                    <img class="img-fluid avatar-img rounded-circle profile-avatar" src="@user.ImageSource" alt="">
+                                </span>
+                            </div>
+                            <div class="col ml--2">
+                                <h4 class="card-title mb-1">
+                                    <a asp-action="ProfileByEmail" asp-controller="Account" asp-route-authorEmail="@user.Email">@(user.Name + " " + user.Surname)</a>
+                                </h4>
+                                <p class="card-text small text-muted mb-1">
+                                    @user.Email
+                                </p>
+                            </div>
+                            @if (Model.Email == User.Identity.Name)
+                            {
+                                <div class="col-auto mr-2">
+                                    <form asp-action="RemoveFriend" asp-controller="Users" asp-route-userEmail="@user.Email">
+                                        <button type="submit" class="btn btn-sm btn-primary d-none d-md-inline-block">
+                                            Remove
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+﻿@model IEnumerable<MVC.ViewModels.PostViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script language="javascript">
+    function updatePostLikes(postId)
+    {
+        checkbox_id = "likes_checkbox_" + postId;
+        likes_checkbox = document.getElementById(checkbox_id);
+
+        likes_count_id = "likes_count_" + postId;
+        count = document.getElementById(likes_count_id);
+
+        checkbox_label_id = "checkbox_label_" + postId;
+        checkbox_label = document.getElementById(checkbox_label_id); 
+
+        if (likes_checkbox.checked) {
+            checkbox_label.style.background = "#28A745"
+            count.textContent = parseInt(count.textContent) + 1;
+        }
+        else
+        {
+            checkbox_label.style.background = "#6c757d"
+            count.textContent = parseInt(count.textContent) - 1;
+        }
+
+        document.getElementById('like_form_' + postId).submit();
+    }
+</script>
+
+<section>
+    <div class="row">
+        <form class="form-group col align-items-center" asp-controller="Posts" asp-action="AddPost">
+            <label for="postText">New Post</label>
+            <textarea name="postText" type="textarea" class="form-control" placeholder="Enter Post Text"></textarea>
+            <button type="submit" class="btn btn-sm btn-primary float-right">Send</button>
+         </form>
+    </div>
+    <ul class="wall list-group list-group-lg list my--4">
+        @foreach (var post in Model)
+        {
+            <li class="post list-grop list-group-item mt-2 mb-2 px-0">
+                <div class="row ml-2 mr-2 align-items-center">
+                    <div>
+                        <span class="avatar avatar-lg rounded-circle">
+                            <img class="img-fluid avatar-img rounded-circle profile-avatar" src="@post.AuthorImageSource" alt="">
+                        </span>
+                    </div>
+                    <div class="col">
+                        <h4 class="card-title mb-1">
+                            <a asp-action="ProfileByEmail" asp-controller="Account" asp-route-authorEmail="@post.AuthorEmail">@(post.AuthorName + " " + post.AuthorSurname)</a>
+                        </h4>
+                        <p class="card-text small text-muted mb-1">
+                            @post.AuthorEmail
+                        </p>
+                    </div>
+                    <div class="post-text col-12">
+                        <p class="card-text mr-4 mt-4 ml-3 mb-2">
+                            @post.Text
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <form class="float-right" id=@("like_form_" + post.Id) asp-controller="Posts" asp-action="LikeClicked" asp-route-postId="@post.Id" data-ajax="true">
+                            @{bool isLiked = post.Likes.AsEnumerable().Any(el => el.Email == User.Identity.Name);}
+                            @if (isLiked)
+                            {
+                                <label id=@("checkbox_label_" + post.Id) class="btn btn-success">
+                                    Like
+                                    <input id=@("likes_checkbox_" + post.Id) type="checkbox" checked onChange="updatePostLikes('@post.Id')" value="Like" class="btn btn-sm like-checkbox">
+                                </label>
+                            }
+                            else
+                            {
+                                <label id=@("checkbox_label_" + post.Id) class="btn btn-primary">
+                                    Like
+                                    <input id=@("likes_checkbox_" + post.Id) type="checkbox" onChange="updatePostLikes('@post.Id')" value="Like" class="btn btn-sm like-checkbox">
+                                </label>
+                            }
+                            <div id="@("likes_count_" + post.Id)" class="btn float-right">
+                                @(post.Likes.Count)
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12">
+                        <ul class="list-group list-group-lg list-group-flush list my--4">
+                            @foreach (var comment in post.Comments)
+                            {
+                                <li class="list-group-item ml-5 mr-2 px-0">
+                                    <div class="row align-items-center">
+                                        <span class="avatar avatar-lg">
+                                            <img class="img-fluid avatar-img rounded-circle profile-avatar" src="@comment.AuthorImageSource" alt="">
+                                        </span>
+                                        <div class="col comment-content">
+                                            <h4 class="card-title small mb-1">
+                                                <a asp-action="ProfileByEmail" asp-controller="Account" asp-route-authorEmail="@comment.AuthorEmail">@(comment.AuthorName + " " + comment.AuthorSurname)</a>
+                                            </h4>
+                                            <p class="card-text small text-muted mb-1">
+                                                @comment.AuthorEmail
+                                            </p>
+                                            <div class="text-secondary">
+                                                <p class="card-text text-center float-left mr-4 mt-1 mb-1">
+                                                    @(comment.Text + comment.Id)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+                    <div class="col-12">
+                        <form class="form-group align-items-center ml-5 mr-5" asp-controller="Posts" asp-action="AddComment" asp-route-postId=@post.Id>
+                            <div>
+                                <label for="@("comment_text_" + post.Id)">Comment:</label>
+                                <textarea name="commentText" type="textarea" class="form-control" id="@("comment_text_" + post.Id)" placeholder="Enter Comment"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-sm btn-primary float-right">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</section>
