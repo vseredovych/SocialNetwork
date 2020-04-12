@@ -49,13 +49,15 @@ namespace MVC.Controllers
         {
             ViewData["authorizedUser"] = User.Identity.Name;
             _userService.AddFriend(User.Identity.Name, userEmail);
-            return NoContent();
+            return RedirectToAction("Users", "Users");
         }
+        [HttpPost]
+        [Authorize]
         public IActionResult RemoveFriend(string userEmail)
         {
             ViewData["authorizedUser"] = User.Identity.Name;
             _userService.RemoveFriend(User.Identity.Name, userEmail);
-            return NoContent();
+            return RedirectToAction("Users", "Users");
         }
     }
 }

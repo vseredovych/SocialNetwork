@@ -144,6 +144,15 @@ namespace MVC.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult RemoveFriend(string userEmail)
+        {
+            ViewData["authorizedUser"] = User.Identity.Name;
+            _userService.RemoveFriend(User.Identity.Name, userEmail);
+            return RedirectToAction("Profile", "Account");
+        }
+
         [Authorize]
         public async Task<IActionResult> Logout()
         {

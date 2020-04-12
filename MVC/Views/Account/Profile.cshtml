@@ -5,10 +5,10 @@
 }
 
 <script>
-        function update() {
-            var el = document.getElementById("update-text");
-            el.textContent = "Updated!";
-        }
+    function update() {
+        var el = document.getElementById("update-text");
+        el.textContent = "Updated!";
+    }
 </script>
 
 <div class="container">
@@ -130,8 +130,8 @@
                             @if (Model.Email == User.Identity.Name)
                             {
                                 <div class="col-auto mr-2">
-                                    <form asp-action="RemoveFriend" asp-controller="Users" asp-route-userEmail="@user.Email">
-                                        <button type="submit" class="btn btn-sm btn-primary d-none d-md-inline-block">
+                                    <form asp-action="RemoveFriend" asp-controller="Account" asp-route-userEmail="@user.Email">
+                                        <button onclick="resreshPage()" type="submit" class="btn btn-sm btn-primary d-none d-md-inline-block">
                                             Remove
                                         </button>
                                     </form>

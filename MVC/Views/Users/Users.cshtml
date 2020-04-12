@@ -33,7 +33,7 @@
                         @if (user.Friends.AsQueryable().Any(el => el.Email == User.Identity.Name))
                         {
                         <form asp-action="RemoveFriend" asp-controller="Users" asp-route-userEmail="@user.Email">
-                            <button type="submit" class="btn btn-sm btn-primary d-none d-md-inline-block">
+                            <button type="submit" onClick="history.go(0)" class="btn btn-sm btn-primary d-none d-md-inline-block">
                                 Remove
                             </button>
                         </form>
@@ -41,7 +41,7 @@
                         else
                         {
                         <form asp-action="AddFriend" asp-controller="Users" asp-route-userEmail="@user.Email">
-                            <button type="submit" class="btn btn-sm btn-primary d-none d-md-inline-block">
+                            <button type="submit" onClick="history.go(0)" class="btn btn-sm btn-primary d-none d-md-inline-block">
                                 Add
                             </button>
                         </form>
