@@ -8,8 +8,7 @@
  - Removing relationships (Frends)
  - Displaying the connection length in a profile
 
-# Database json dumps located in ./res folder
-*Database consists of two collections:*
+# Dumps located at ./res folder
  - users - mongo users
  - posts - mongo posts
  - dump.json - neo4j persons
@@ -30,7 +29,7 @@
  - Viewing users
  - Add/remove users to the friend list
  
-# Pages
+# Application consist of pages:
   - Registration
   - Login
   - Home page - posts wall
