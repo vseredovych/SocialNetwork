@@ -48,7 +48,7 @@ namespace MVC.Controllers
             var authorizedUser = await _userService.GetByEmailAsync(User.Identity.Name);
 
             var userModel = await _userService.GetByEmailAsync(authorEmail);
-            var profileModel = await _userService.GetProfileModel(userModel);
+            var profileModel = await _userService.GetProfileModel(userModel, authorizedUser);
 
             if (authorizedUser.Email == profileModel.Email)
             {

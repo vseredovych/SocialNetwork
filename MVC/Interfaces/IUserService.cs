@@ -16,6 +16,7 @@ namespace MVC.Interfaces
         void AddFriend(string requesterEmail, string userEmail);
         void RemoveFriend(string requesterEmail, string userEmail);
         Task<ProfileViewModel> GetProfileModel(UserViewModel model);
+        Task<ProfileViewModel> GetProfileModel(UserViewModel mode1, UserViewModel model2);
         Task<ProfileViewModel> UpdateUserAsync(ProfileViewModel userModel);
     }
 }

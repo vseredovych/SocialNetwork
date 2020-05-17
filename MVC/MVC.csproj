@@ -18,6 +18,7 @@
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
+    <PackageReference Include="Neo4jClient" Version="3.1.0.6" />
     <PackageReference Include="Unity" Version="5.11.4" />
     <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
   </ItemGroup>

@@ -21,6 +21,8 @@ namespace MVC.ViewModels
 
         public List<Friend> Friends { get; set; }
 
+        public int ShortestPathLength { get; set; }
+
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

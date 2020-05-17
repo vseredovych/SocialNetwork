@@ -1,0 +1,80 @@
+﻿[
+  {
+    "n": {
+      "identity": 0,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "name": "admin",
+        "surname": "admin",
+        "email": "admin@gmail.com"
+      }
+    }
+  },
+  {
+    "n": {
+      "identity": 1,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "name": "Bob",
+        "surname": "Ross",
+        "email": "bob.ros@paint.com"
+      }
+    }
+  },
+  {
+    "n": {
+      "identity": 2,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "name": "John",
+        "surname": "Snow",
+        "email": "know.nothing@what.why"
+      }
+    }
+  },
+  {
+    "n": {
+      "identity": 21,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "name": "Adam",
+        "surname": "Jensen",
+        "email": "jensen@silent.nope"
+      }
+    }
+  },
+  {
+    "n": {
+      "identity": 100,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "name": "Viktor",
+        "surname": "Seredovych",
+        "email": "victor.seredovich@gmail.com"
+      }
+    }
+  },
+  {
+    "n": {
+      "identity": 101,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "name": "Igor",
+        "surname": "Petruk",
+        "email": "ipetr@email.com"
+      }
+    }
+  }
+]

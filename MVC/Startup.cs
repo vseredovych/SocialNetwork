@@ -32,16 +32,22 @@ namespace MVC
             Configuration.GetSection(nameof(MongoConfiguration)));
             services.AddSingleton<IMongoConfiguration>(sp =>
                 sp.GetRequiredService<IOptions<MongoConfiguration>>().Value);
-
             services.AddTransient<IMongoContext, MongoContext>();
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            // BLL Mapper Dependency INjection
+            //Neo4j Configuration Dependency Injection
+            services.Configure<Neo4jConfiguration>(
+            Configuration.GetSection(nameof(Neo4jConfiguration)));
+            services.AddSingleton<INeo4jConfiguration>(sp =>
+                sp.GetRequiredService<IOptions<Neo4jConfiguration>>().Value);
+            services.AddTransient<INeo4jContext, Neo4jContext>();
+
+            // BLL Mapper Dependency Injection
             services.AddSingleton<IMapper>(ObjectsMapper.CreateMapper());
 
             // Services Dependency Injection
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IPersonService, PersonService>();
 
             // Controllers Dependency Injection
             services.AddControllers();

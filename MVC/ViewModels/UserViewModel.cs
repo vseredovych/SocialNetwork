@@ -16,6 +16,7 @@ namespace MVC.ViewModels
         public string HashPassword { get; set; }
 
         public List<Friend> Friends { get; set; }
+
         public string ImageSource { get; set; }
     }
 }

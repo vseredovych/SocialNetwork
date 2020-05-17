@@ -19,6 +19,7 @@ namespace MVC.Database
                 cfg.CreateMap<User, Friend>();
                 cfg.CreateMap<UserViewModel, Friend>();
                 cfg.CreateMap<UserViewModel, Like>();
+                cfg.CreateMap<User, Person>();
                 //cfg.CreateMap<User, UserViewModel>()
                 //.ForMember(x => x.Id,
                 //           m => m.MapFrom(y => y._id));

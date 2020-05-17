@@ -17,11 +17,14 @@ namespace MVC.Services
 
         private readonly IMongoContext _context;
         private readonly IMapper _mapper;
+        private readonly IPersonService _personService;
 
-        public UserService(IMongoContext context, IMapper mapper)
+
+        public UserService(IMongoContext context, IMapper mapper, IPersonService personService)
         {
             this._context = context;
             this._mapper = mapper;
+            this._personService = personService;
         }
         public async Task<IEnumerable<UserViewModel>> GetAllAsync()
         {
@@ -53,6 +56,8 @@ namespace MVC.Services
             var user = _mapper.Map<User>(userModel);
             user.Id = Convert.ToString(ObjectId.GenerateNewId());
             await _context.Users.InsertOneAsync(user);
+            
+            _personService.CreatePerson(user);
         }
         public async Task<bool> IsUserExistsAsync(string email)
         {
@@ -112,32 +117,46 @@ namespace MVC.Services
         public async Task<ProfileViewModel> GetProfileModel(UserViewModel userModel)
         {
             var user = await GetByEmailAsync(userModel.Email);
-            var updateModel = _mapper.Map<ProfileViewModel>(userModel);
-            return updateModel;
+            var model = _mapper.Map<ProfileViewModel>(userModel);
+            model.ShortestPathLength = 0;
+
+            return model;
+        }
+
+        public async Task<ProfileViewModel> GetProfileModel(UserViewModel userModel1, UserViewModel userModel2)
+        {
+            var user = await GetByEmailAsync(userModel1.Email);
+            var model = _mapper.Map<ProfileViewModel>(userModel1);
+            model.ShortestPathLength = _personService.GetShortestPathLength(userModel1.Email, userModel2.Email);
+
+            return model;
         }
 
         public void AddFriend(string requesterEmail, string userEmail)
         {
-            AddFrienddByEmailAsync(requesterEmail, userEmail);
-            AddFrienddByEmailAsync(userEmail, requesterEmail);
+            AddFriendByEmailAsync(requesterEmail, userEmail);
+            AddFriendByEmailAsync(userEmail, requesterEmail);
         }
+
         public void RemoveFriend(string requesterEmail, string userEmail)
         {
             RemoveFriendByEmailAsync(requesterEmail, userEmail);
             RemoveFriendByEmailAsync(userEmail, requesterEmail);
         }
 
-        private async void AddFrienddByEmailAsync(string requesterEmail, string userEmail)
+        private async void AddFriendByEmailAsync(string requesterEmail, string userEmail)
         {
             var friend = _mapper.Map<Friend>(await GetByEmailAsync(userEmail));
-
 
             var filter = Builders<User>.Filter.Eq(el => el.Email, requesterEmail);
             var update = Builders<User>.Update
                     .Push<Friend>(el => el.Friends, friend);
 
             await _context.Users.FindOneAndUpdateAsync(filter, update);
+            
+            _personService.CreateRelationship(requesterEmail, userEmail);
         }
+
         private async void RemoveFriendByEmailAsync(string requesterEmail, string userEmail)
         {
             var friend = _mapper.Map<Friend>(await GetByEmailAsync(userEmail));
@@ -148,7 +167,9 @@ namespace MVC.Services
 
             await _context.Users.FindOneAndUpdateAsync(filter, update);
 
+            _personService.DeleteRelationship(requesterEmail, userEmail);
         }
+
         private async void UpdateFriendsUserInfo(User user)
         {
             var update = Builders<User>.Update
@@ -174,7 +195,6 @@ namespace MVC.Services
         }
         private async void UpdateCommentsUserInfo(User user)
         {
-            //                el => el.Comments.Where(el => el.AuthorEmail == user.Email)
             var update = Builders<Post>.Update
                .Set("comments.$[g].authorName", user.Name)
                .Set("comments.$[g].authorSurname", user.Surname)
