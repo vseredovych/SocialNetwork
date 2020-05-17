@@ -1,22 +1,22 @@
-# Neo4j
+## Neo4j
 ![Neo4j Graph](res/graph.png)
 
-## Supports:
+#### Supports:
  - Adding a new node (Person)
  - Removing a node (Person)
  - Adding ralationships (Friends)
  - Removing relationships (Frends)
  - Displaying the connection length in a profile
 
-# Dumps located at ./res folder
+## Dumps located at ./res folder
  - users - mongo users
  - posts - mongo posts
  - dump.json - neo4j persons
  - graph.png - neo4j graph image
 
-# MongoDB
+## MongoDB
 
-## Supports:
+#### Supports:
  - Registering
  - Authenticating 
  - Viewing posts
@@ -29,7 +29,7 @@
  - Viewing users
  - Add/remove users to the friend list
  
-# Application consist of pages:
+## Application consist of pages:
   - Registration
   - Login
   - Home page - posts wall
